@@ -335,7 +335,7 @@ public class PlayerController : MonoBehaviour
             Direction.Down => Vector2.down,
             Direction.Right => Vector2.right,
             Direction.Left => Vector2.left,
-            _ => Vector2.zero // 默認情況，防止未處理的情況
+            _ => Vector2.zero
         };
 
         body.AddForce(vector2 * force, ForceMode2D.Impulse);
