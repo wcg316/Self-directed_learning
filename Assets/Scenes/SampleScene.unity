@@ -159,8 +159,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: e16f4024a52c0544db13e0561dab5786, type: 3}
-  m_Resource: {fileID: 8300000, guid: e16f4024a52c0544db13e0561dab5786, type: 3}
+  m_audioClip: {fileID: 8300000, guid: ebe4016555d5dc04ea5400e58441b9ec, type: 3}
+  m_Resource: {fileID: 8300000, guid: ebe4016555d5dc04ea5400e58441b9ec, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.2
   m_Pitch: 1
@@ -888,9 +888,8 @@ MonoBehaviour:
   playerAnimation: {fileID: 0}
   footstepSoundSource: {fileID: 1979824962}
   footstepSounds:
-  - {fileID: 8300000, guid: 7db921ebab6cd7043a4524f16ed50f0e, type: 3}
-  attackSoundSource: {fileID: 1979824961}
-  normalAttackSound: {fileID: 8300000, guid: 085d4c774f7df854396e7c354015a97f, type: 3}
+  - {fileID: 8300000, guid: 3f897551499a9c846a0d29314cac2113, type: 3}
+  normalAttackSound: {fileID: 8300000, guid: b0a5fe6914d41ed42b93f43b2a719e1e, type: 3}
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
