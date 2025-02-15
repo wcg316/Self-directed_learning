@@ -28,7 +28,7 @@ public class AttackType
     }
     AudioSource audioSource;
     [SerializeField] AudioClip sound;
-    public int horizonalDirectionMultiplier;
+    private int horizonalDirectionMultiplier;
     float offsetX;
     float offsetY;
     int baseAngle;
