@@ -17,6 +17,7 @@ public enum ColliderShape
     RunLeft
 }
 
+[System.Serializable]
 public class AttackType
 {
     GameObject effect;
@@ -116,8 +117,8 @@ public class AttackType
 public class PlayerController : MonoBehaviour
 {
     public static PlayerController Instance;
-    [SerializeField] private ColliderController colliderController;
-    [SerializeField] private PlayerAnimation playerAnimation;
+    private ColliderController colliderController;
+    private PlayerAnimation playerAnimation;
     public AudioSource footstepSoundSource;
     public AudioClip[] footstepSounds;
     private float footstepSoundInterval = 0.35f;
