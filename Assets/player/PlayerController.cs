@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using static UnityEngine.Random;
+using Unity.Collections;
 
 public enum Direction
 {
@@ -20,13 +21,13 @@ public enum ColliderShape
 [System.Serializable]
 public class AttackType
 {
-    GameObject effect;
+    [SerializeField] GameObject effect;
     public GameObject Effect
     {
         get => effect;
     }
     AudioSource audioSource;
-    AudioClip sound;
+    [SerializeField] AudioClip sound;
     public int horizonalDirectionMultiplier;
     float offsetX;
     float offsetY;
@@ -51,8 +52,8 @@ public class AttackType
                       float distanceX, float distanceY, int b_angle, int o_angle,
                       float attackDuration, float attackCooldown)
     {
-        effect = attackEffect;
-        sound = attackSound;
+        effect = attackEffect ?? effect;
+        sound = attackSound ?? sound;
         offsetX = distanceX;
         offsetY = distanceY;
         baseAngle = b_angle;

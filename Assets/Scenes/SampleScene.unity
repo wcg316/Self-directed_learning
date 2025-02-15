@@ -884,12 +884,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef043aae6b74c564ea1a98d5f16d1db8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colliderController: {fileID: 0}
-  playerAnimation: {fileID: 0}
   footstepSoundSource: {fileID: 1979824962}
   footstepSounds:
   - {fileID: 8300000, guid: 3f897551499a9c846a0d29314cac2113, type: 3}
-  normalAttackSound: {fileID: 8300000, guid: b0a5fe6914d41ed42b93f43b2a719e1e, type: 3}
+  normalAttackSound: {fileID: 0}
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -901,8 +899,10 @@ MonoBehaviour:
   onSprintCooldown: 0
   jumpForce: 5
   playingFootstepSound: 0
-  normalAttackSlash: {fileID: 754375316}
+  normalAttackSlash: {fileID: 0}
   onAttackCooldown: 0
+  normalAttack:
+    horizonalDirectionMultiplier: 0
 --- !u!68 &1979824954
 EdgeCollider2D:
   m_ObjectHideFlags: 0
