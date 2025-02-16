@@ -112,7 +112,6 @@ public class PlayerController : MonoBehaviour
     public AudioClip[] footstepSounds;
     private float footstepSoundInterval = 0.35f;
     private bool isPlayingFootstepSound = false;
-    public AudioClip normalAttackSound;
     public LayerMask groundLayer;
     private const float EXTRA_HEIGHT = 2.75f;
     public bool isGrounded = true;
@@ -128,7 +127,6 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D body;
     private SpriteRenderer spriteRenderer;
     private Animator animator;
-    public GameObject normalAttackSlash;
     public bool onAttackCooldown = false;
     public AttackType normalAttack;
 
