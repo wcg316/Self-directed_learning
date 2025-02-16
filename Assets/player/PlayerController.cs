@@ -31,8 +31,8 @@ public class AttackType
     int horizonalDirectionMultiplier;
     [SerializeField] int baseAngle;
     [SerializeField] int offsetAngle;
-    [SerializeField] float offsetX;
-    [SerializeField] float offsetY;
+    [SerializeField] float distanceX;
+    [SerializeField] float distanceY;
     [SerializeField] float duration;
     public float Duration
     {
@@ -54,8 +54,8 @@ public class AttackType
     {
         effect = attackEffect ?? effect;
         sound = attackSound ?? sound;
-        offsetX = distanceX;
-        offsetY = distanceY;
+        this.distanceX = distanceX;
+        this.distanceY = distanceY;
         baseAngle = b_angle;
         offsetAngle = o_angle;
         duration = attackDuration;
@@ -107,7 +107,7 @@ public class AttackType
 
     public void SetPositionFrom(Transform transform)
     {
-        Vector3 offset = new Vector3(offsetX * horizonalDirectionMultiplier, offsetY, 0f);
+        Vector3 offset = new Vector3(distanceX * horizonalDirectionMultiplier, distanceY, 0f);
         effect.transform.localPosition = transform.position + offset;
     }
 
@@ -121,7 +121,7 @@ public class AttackType
 
     public Vector3 GetOffset()
     {
-        return new Vector3(offsetX * horizonalDirectionMultiplier, 0, 0);
+        return new Vector3(distanceX * horizonalDirectionMultiplier, 0, 0);
     }
 
 }
