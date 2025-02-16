@@ -29,16 +29,16 @@ public class AttackType
     AudioSource audioSource;
     [SerializeField] AudioClip sound;
     int horizonalDirectionMultiplier;
-    float offsetX;
-    float offsetY;
-    int baseAngle;
-    int offsetAngle;
-    float duration;
+    [SerializeField] int baseAngle;
+    [SerializeField] int offsetAngle;
+    [SerializeField] float offsetX;
+    [SerializeField] float offsetY;
+    [SerializeField] float duration;
     public float Duration
     {
         get => duration;
     }
-    float cooldownDuration;
+    [SerializeField] float cooldownDuration;
     public float CooldownDuration
     {
         get => cooldownDuration;
@@ -71,6 +71,18 @@ public class AttackType
             effect.SetActive(false);
         }
 
+    }
+
+    public void Initialize()
+    {
+        if (effect != null)
+        {
+            audioSource = effect.GetComponent<AudioSource>();
+            if (audioSource == null)
+                audioSource = effect.AddComponent<AudioSource>();
+
+            effect.SetActive(false);
+        }
     }
 
     public void PlaySound()
@@ -154,7 +166,7 @@ public class PlayerController : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         groundLayer = LayerMask.GetMask("Ground");
-        normalAttack = new AttackType(normalAttackSlash, normalAttackSound, 4f, 0f, 45, 15, 0.23f, 0.4f);
+        normalAttack.Initialize();
         colliderController.InitializeColliders();
     }
 
