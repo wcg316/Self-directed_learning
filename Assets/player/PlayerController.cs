@@ -48,30 +48,6 @@ public class AttackType
     {
         get => onCooldown;
     }
-    public AttackType(GameObject attackEffect, AudioClip attackSound,
-                      float distanceX, float distanceY, int b_angle, int o_angle,
-                      float attackDuration, float attackCooldown)
-    {
-        effect = attackEffect ?? effect;
-        sound = attackSound ?? sound;
-        this.distanceX = distanceX;
-        this.distanceY = distanceY;
-        baseAngle = b_angle;
-        offsetAngle = o_angle;
-        duration = attackDuration;
-        cooldownDuration = attackCooldown;
-        onCooldown = false;
-
-        if (effect != null)
-        {
-            audioSource = effect.GetComponent<AudioSource>();
-            if (audioSource == null)
-                audioSource = effect.AddComponent<AudioSource>();
-
-            effect.SetActive(false);
-        }
-
-    }
 
     public void Initialize()
     {

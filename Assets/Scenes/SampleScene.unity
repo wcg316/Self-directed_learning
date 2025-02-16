@@ -902,7 +902,14 @@ MonoBehaviour:
   normalAttackSlash: {fileID: 0}
   onAttackCooldown: 0
   normalAttack:
-    horizonalDirectionMultiplier: 0
+    effect: {fileID: 754375316}
+    sound: {fileID: 8300000, guid: b0a5fe6914d41ed42b93f43b2a719e1e, type: 3}
+    baseAngle: 45
+    offsetAngle: 15
+    distanceX: 4
+    distanceY: 0
+    duration: 0.23
+    cooldownDuration: 0.4
 --- !u!68 &1979824954
 EdgeCollider2D:
   m_ObjectHideFlags: 0
