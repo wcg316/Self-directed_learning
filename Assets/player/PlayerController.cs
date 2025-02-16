@@ -116,12 +116,12 @@ public class PlayerController : MonoBehaviour
     private const float EXTRA_HEIGHT = 2.75f;
     public bool isGrounded = true;
     public float moveSpeed;
-    public float sprintForce;
-    private const float SPRINT_DURATION = 0.15f;
-    private bool isSprinting = false;
-    public float sprintCooldownDuration;
-    public bool canSprintInAir = false;
-    public bool onSprintCooldown = false;
+    public float dashForce;
+    private const float DASH_DURATION = 0.15f;
+    private bool isDashing = false;
+    public float dashCooldownDuration;
+    public bool canDashInAir = false;
+    public bool onDashCooldown = false;
     public float jumpForce;
     public bool playingFootstepSound;
     private Rigidbody2D body;
@@ -151,7 +151,7 @@ public class PlayerController : MonoBehaviour
         Variable();
         Move();
         Jump();
-        Sprint();
+        Dash();
         Attack();
     }
 
@@ -170,14 +170,14 @@ public class PlayerController : MonoBehaviour
     {
         isGrounded = CheckIfIsGrounded();
         moveSpeed = 10f;
-        sprintForce = 100f;
+        dashForce = 100f;
         jumpForce = 30f;
-        sprintCooldownDuration = 0.5f;
+        dashCooldownDuration = 0.5f;
     }
 
     void Move()
     {
-        bool canMove = !isSprinting;
+        bool canMove = !isDashing;
         if (Input.GetKey(KeyCode.D) && canMove)
         {
             MoveInDirection(Direction.Right);
@@ -307,7 +307,7 @@ public class PlayerController : MonoBehaviour
 
     bool CheckIfPlayerCanJump()
     {
-        return isGrounded && !isSprinting;
+        return isGrounded && !isDashing;
     }
 
     void ClearVerticalForce()
@@ -330,54 +330,54 @@ public class PlayerController : MonoBehaviour
     }
 
     /* 舊版衝刺
-    void Sprint()
+    void Dash()
     {
         if (Input.GetKey(KeyCode.K))
         {
             Direction direction = GetDirection();
-            PlayAnimation("sprint");
+            PlayAnimation("dash");
             MoveForwardWithSpeed(
-                moveSpeed * Time.deltaTime * sprintAccelerate * GetMovingDirectionMultiplier(direction)
+                moveSpeed * Time.deltaTime * dashAccelerate * GetMovingDirectionMultiplier(direction)
             );
         }
         else
         {
-            StopAnimation("sprint");
+            StopAnimation("dash");
         }
     }*/
 
-    void Sprint()
+    void Dash()
     {
-        bool playerCanSprint = CheckIfPlayerCanSprint();
-        bool playerSprinted = Input.GetKeyDown(KeyCode.K) && playerCanSprint;
+        bool playerCanDash = CheckIfPlayerCanDash();
+        bool playerDashed = Input.GetKeyDown(KeyCode.K) && playerCanDash;
 
-        if (playerSprinted)
+        if (playerDashed)
         {
-            StartCoroutine(SprintCoroutine());
+            StartCoroutine(DashCoroutine());
         }
     }
 
-    bool CheckIfPlayerCanSprint()
+    bool CheckIfPlayerCanDash()
     {
-        return !onSprintCooldown && (isGrounded || canSprintInAir);
+        return !onDashCooldown && (isGrounded || canDashInAir);
     }
 
-    IEnumerator SprintCoroutine()
+    IEnumerator DashCoroutine()
     {
-        onSprintCooldown = true;
-        isSprinting = true;
+        onDashCooldown = true;
+        isDashing = true;
         Direction direction = GetHorizontalDirection();
 
-        ApplyImpulseForceToDirection(sprintForce, direction);
-        PlayAnimation("sprint");
+        ApplyImpulseForceToDirection(dashForce, direction);
+        PlayAnimation("dash");
 
-        yield return new WaitForSeconds(SPRINT_DURATION);
+        yield return new WaitForSeconds(DASH_DURATION);
         body.linearVelocity = new Vector2(0f, body.linearVelocityY);
-        StopAnimation("sprint");
-        isSprinting = false;
+        StopAnimation("dash");
+        isDashing = false;
 
-        yield return new WaitForSeconds(sprintCooldownDuration);
-        onSprintCooldown = false;
+        yield return new WaitForSeconds(dashCooldownDuration);
+        onDashCooldown = false;
     }
 
     Direction GetHorizontalDirection()
