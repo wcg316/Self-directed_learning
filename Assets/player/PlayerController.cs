@@ -162,12 +162,16 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
-            body.linearVelocity = Vector2.zero;
-            transform.position = new Vector2(0f, -0.45f);
+            TeleportToOrigin();
         }
         Debug.DrawRay(transform.position, Vector2.down * EXTRA_HEIGHT, Color.red);
     }
 
+    void TeleportToOrigin()
+    {
+        body.linearVelocity = Vector2.zero;
+        transform.position = new Vector2(0f, -0.45f);
+    }
 
     void Variable()
     {
@@ -419,10 +423,10 @@ public class PlayerController : MonoBehaviour
 
     void Die()
     {
-        if (transform.position.y < -40f)
+        bool playerDied = transform.position.y < -40f;
+        if (playerDied)
         {
-            body.linearVelocity = Vector2.zero;
-            transform.position = new Vector2(0f, -0.45f);
+            TeleportToOrigin();
         }
     }
 
