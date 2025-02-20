@@ -147,14 +147,23 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         ForTesting();
-
+        Dead();
         Variable();
         Move();
         Jump();
         Dash();
         Attack();
     }
+    void Dead()
+    {
+        if (transform.position.y < -40)
+        {
+            body.linearVelocity = Vector2.zero;
+            transform.position = new Vector2(0f, -0.45f);
+        }
 
+
+    }
     void ForTesting()
     {
         if (Input.GetKeyDown(KeyCode.R))
