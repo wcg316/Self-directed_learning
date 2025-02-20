@@ -147,23 +147,15 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         ForTesting();
-        Dead();
+        
         Variable();
         Move();
         Jump();
         Dash();
         Attack();
+        Dead();
     }
-    void Dead()
-    {
-        if (transform.position.y < -40)
-        {
-            body.linearVelocity = Vector2.zero;
-            transform.position = new Vector2(0f, -0.45f);
-        }
 
-
-    }
     void ForTesting()
     {
         if (Input.GetKeyDown(KeyCode.R))
@@ -423,4 +415,13 @@ public class PlayerController : MonoBehaviour
         return hit.collider != null;
     }
 
+    void Dead()
+    {
+        if (transform.position.y < -40f)
+        {
+            body.linearVelocity = Vector2.zero;
+            transform.position = new Vector2(0f, -0.45f);
+        }
+    }
+    
 }
