@@ -19,7 +19,7 @@ public enum ColliderShape
 }
 
 [System.Serializable]
-public class AttackType
+public class EffectProperties
 {
     [SerializeField] GameObject effect;
     public GameObject Effect
@@ -128,7 +128,8 @@ public class PlayerController : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Animator animator;
     public bool onAttackCooldown = false;
-    public AttackType normalAttack;
+    public EffectProperties normalAttack;
+    public EffectProperties dashDust;
 
     void Start()
     {
@@ -141,29 +142,22 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
         groundLayer = LayerMask.GetMask("Ground");
         normalAttack.Initialize();
+        dashDust.Initialize();
         colliderController.InitializeColliders();
     }
 
     void Update()
     {
         ForTesting();
-        Dead();
+        
         Variable();
         Move();
         Jump();
         Dash();
         Attack();
+        Dead();
     }
-    void Dead()
-    {
-        if (transform.position.y < -40)
-        {
-            body.linearVelocity = Vector2.zero;
-            transform.position = new Vector2(0f, -0.45f);
-        }
 
-
-    }
     void ForTesting()
     {
         if (Input.GetKeyDown(KeyCode.R))
@@ -381,29 +375,29 @@ public class PlayerController : MonoBehaviour
     void Attack()
     {
         bool playerAttacked = Input.GetKeyDown(KeyCode.J) && !normalAttack.OnCooldown;
-        Direction direction = GetHorizontalDirection();
-
+        
         if (playerAttacked)
         {
-            StartCoroutine(AttackCoroutine(normalAttack, direction));
+            Direction direction = GetHorizontalDirection();
+            StartCoroutine(EffectCoroutine(normalAttack, direction));
         }
     }
 
-    IEnumerator AttackCoroutine(AttackType attackType, Direction direction)
+    IEnumerator EffectCoroutine(EffectProperties effect, Direction direction)
     {
-        attackType.SetHorizontalDirectionMultiplier(GetHorizontalDirectionMultiplier(direction));
+        effect.SetHorizontalDirectionMultiplier(GetHorizontalDirectionMultiplier(direction));
 
-        attackType.SetPositionFrom(transform);
-        attackType.SetAngle();
-        ActivateAttackEffect(attackType.Effect);
-        attackType.PlaySound();
-        attackType.StartCooldown();
+        effect.SetPositionFrom(transform);
+        effect.SetAngle();
+        ActivateAttackEffect(effect.Effect);
+        effect.PlaySound();
+        effect.StartCooldown();
 
-        yield return new WaitForSeconds(attackType.Duration);
-        HideAttackEffect(attackType.Effect);
+        yield return new WaitForSeconds(effect.Duration);
+        HideAttackEffect(effect.Effect);
 
-        yield return new WaitForSeconds(attackType.CooldownDuration);
-        attackType.EndCooldown();
+        yield return new WaitForSeconds(effect.CooldownDuration);
+        effect.EndCooldown();
     }
 
     void ActivateAttackEffect(GameObject effect)
@@ -423,4 +417,13 @@ public class PlayerController : MonoBehaviour
         return hit.collider != null;
     }
 
+    void Dead()
+    {
+        if (transform.position.y < -40f)
+        {
+            body.linearVelocity = Vector2.zero;
+            transform.position = new Vector2(0f, -0.45f);
+        }
+    }
+    
 }
