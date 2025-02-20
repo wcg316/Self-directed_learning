@@ -185,6 +185,7 @@ public class PlayerController : MonoBehaviour
     void Move()
     {
         bool canMove = !isDashing;
+
         if (Input.GetKey(KeyCode.D) && canMove)
         {
             MoveInDirection(Direction.Right);
@@ -241,6 +242,7 @@ public class PlayerController : MonoBehaviour
     void AdjustColliderTo(ColliderShape colliderShape)
     {
         int idx = (int)colliderShape;
+
         if (colliderController.colliders[idx].Enabled == false)
         {
             colliderController.FindTheOnlyOneColliderEnabled().enabled = false;
@@ -424,6 +426,7 @@ public class PlayerController : MonoBehaviour
     void Die()
     {
         bool playerDied = transform.position.y < -40f;
+
         if (playerDied)
         {
             TeleportToOrigin();
