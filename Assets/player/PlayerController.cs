@@ -377,11 +377,11 @@ public class PlayerController : MonoBehaviour
 
         if (playerAttacked)
         {
-            StartCoroutine(AttackCoroutine(normalAttack, direction));
+            StartCoroutine(EffectCoroutine(normalAttack, direction));
         }
     }
 
-    IEnumerator AttackCoroutine(AttackType attackType, Direction direction)
+    IEnumerator EffectCoroutine(AttackType attackType, Direction direction)
     {
         attackType.SetHorizontalDirectionMultiplier(GetHorizontalDirectionMultiplier(direction));
 
