@@ -19,7 +19,7 @@ public enum ColliderShape
 }
 
 [System.Serializable]
-public class AttackType
+public class EffectProperties
 {
     [SerializeField] GameObject effect;
     public GameObject Effect
@@ -128,7 +128,7 @@ public class PlayerController : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Animator animator;
     public bool onAttackCooldown = false;
-    public AttackType normalAttack;
+    public EffectProperties normalAttack;
 
     void Start()
     {
@@ -381,21 +381,21 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    IEnumerator EffectCoroutine(AttackType attackType, Direction direction)
+    IEnumerator EffectCoroutine(EffectProperties effect, Direction direction)
     {
-        attackType.SetHorizontalDirectionMultiplier(GetHorizontalDirectionMultiplier(direction));
+        effect.SetHorizontalDirectionMultiplier(GetHorizontalDirectionMultiplier(direction));
 
-        attackType.SetPositionFrom(transform);
-        attackType.SetAngle();
-        ActivateAttackEffect(attackType.Effect);
-        attackType.PlaySound();
-        attackType.StartCooldown();
+        effect.SetPositionFrom(transform);
+        effect.SetAngle();
+        ActivateAttackEffect(effect.Effect);
+        effect.PlaySound();
+        effect.StartCooldown();
 
-        yield return new WaitForSeconds(attackType.Duration);
-        HideAttackEffect(attackType.Effect);
+        yield return new WaitForSeconds(effect.Duration);
+        HideAttackEffect(effect.Effect);
 
-        yield return new WaitForSeconds(attackType.CooldownDuration);
-        attackType.EndCooldown();
+        yield return new WaitForSeconds(effect.CooldownDuration);
+        effect.EndCooldown();
     }
 
     void ActivateAttackEffect(GameObject effect)
