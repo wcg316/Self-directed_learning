@@ -149,13 +149,13 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         ForTesting();
-        
+
         Variable();
         Move();
         Jump();
         Dash();
         Attack();
-        Dead();
+        Die();
     }
 
     void ForTesting()
@@ -375,7 +375,7 @@ public class PlayerController : MonoBehaviour
     void Attack()
     {
         bool playerAttacked = Input.GetKeyDown(KeyCode.J) && !normalAttack.OnCooldown;
-        
+
         if (playerAttacked)
         {
             Direction direction = GetHorizontalDirection();
@@ -417,7 +417,7 @@ public class PlayerController : MonoBehaviour
         return hit.collider != null;
     }
 
-    void Dead()
+    void Die()
     {
         if (transform.position.y < -40f)
         {
@@ -425,5 +425,5 @@ public class PlayerController : MonoBehaviour
             transform.position = new Vector2(0f, -0.45f);
         }
     }
-    
+
 }
