@@ -338,22 +338,6 @@ public class PlayerController : MonoBehaviour
         body.AddForce(vector2 * force, ForceMode2D.Impulse);
     }
 
-    /* 舊版衝刺
-    void Dash()
-    {
-        if (Input.GetKey(KeyCode.K))
-        {
-            Direction direction = GetDirection();
-            PlayAnimation("dash");
-            MoveForwardWithSpeed(
-                moveSpeed * Time.deltaTime * dashAccelerate * GetMovingDirectionMultiplier(direction)
-            );
-        }
-        else
-        {
-            StopAnimation("dash");
-        }
-    }*/
 
     void Dash()
     {
