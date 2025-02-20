@@ -129,6 +129,7 @@ public class PlayerController : MonoBehaviour
     private Animator animator;
     public bool onAttackCooldown = false;
     public EffectProperties normalAttack;
+    public EffectProperties dashDust;
 
     void Start()
     {
@@ -141,6 +142,7 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
         groundLayer = LayerMask.GetMask("Ground");
         normalAttack.Initialize();
+        dashDust.Initialize();
         colliderController.InitializeColliders();
     }
 
