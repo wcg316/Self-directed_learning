@@ -375,10 +375,10 @@ public class PlayerController : MonoBehaviour
     void Attack()
     {
         bool playerAttacked = Input.GetKeyDown(KeyCode.J) && !normalAttack.OnCooldown;
-        Direction direction = GetHorizontalDirection();
-
+        
         if (playerAttacked)
         {
+            Direction direction = GetHorizontalDirection();
             StartCoroutine(EffectCoroutine(normalAttack, direction));
         }
     }
