@@ -324,6 +324,11 @@ public class PlayerController : MonoBehaviour
         body.linearVelocityY = 0f;
     }
 
+    void ClearHorizontalForce()
+    {
+        body.linearVelocitX = 0f;
+    }
+
     void ApplyImpulseForceToDirection(float force, Direction direction)
     {
         Vector2 vector2 = direction switch
@@ -365,7 +370,7 @@ public class PlayerController : MonoBehaviour
         PlayAnimation("dash");
 
         yield return new WaitForSeconds(DASH_DURATION);
-        body.linearVelocity = new Vector2(0f, body.linearVelocityY);
+        ClearHorizontalForce();
         StopAnimation("dash");
         isDashing = false;
 
