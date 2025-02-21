@@ -326,7 +326,7 @@ public class PlayerController : MonoBehaviour
 
     void ClearHorizontalForce()
     {
-        body.linearVelocitX = 0f;
+        body.linearVelocityX = 0f;
     }
 
     void ApplyImpulseForceToDirection(float force, Direction direction)
