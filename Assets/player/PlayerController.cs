@@ -61,6 +61,16 @@ public class EffectProperties
         }
     }
 
+    public void Activate()
+    {
+        effect.SetActive(true);
+    }
+
+    public void Hide()
+    {
+        effect.SetActive(false);
+    }
+
     public void PlaySound()
     {
         audioSource.PlayOneShot(sound);
@@ -400,25 +410,17 @@ public class PlayerController : MonoBehaviour
 
         effect.SetPositionFrom(transform);
         effect.SetAngle();
-        ActivateAttackEffect(effect.Effect);
+
+        effect.Activate();
         effect.PlaySound();
+
         effect.StartCooldown();
 
         yield return new WaitForSeconds(effect.Duration);
-        HideAttackEffect(effect.Effect);
+        effect.Hide();
 
         yield return new WaitForSeconds(effect.CooldownDuration);
         effect.EndCooldown();
-    }
-
-    void ActivateAttackEffect(GameObject effect)
-    {
-        effect.SetActive(true);
-    }
-
-    void HideAttackEffect(GameObject effect)
-    {
-        effect.SetActive(false);
     }
 
     bool CheckIfIsGrounded()
