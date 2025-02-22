@@ -113,7 +113,7 @@ public class PlayerController : MonoBehaviour
     private float footstepSoundInterval = 0.35f;
     private bool isPlayingFootstepSound = false;
     public LayerMask groundLayer;
-    private const float EXTRA_HEIGHT = 2.75f;
+    private const float EXTRA_HEIGHT = 1.4f;
     public bool isGrounded = true;
     public float moveSpeed;
     public float dashForce;
