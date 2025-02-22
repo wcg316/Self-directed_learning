@@ -2676,7 +2676,7 @@ MonoBehaviour:
     sound: {fileID: 8300000, guid: b0a5fe6914d41ed42b93f43b2a719e1e, type: 3}
     baseAngle: 45
     offsetAngle: 15
-    distanceX: 4
+    distanceX: 2.5
     distanceY: 0
     duration: 0.23
     cooldownDuration: 0.4
