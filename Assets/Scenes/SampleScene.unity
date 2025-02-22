@@ -2328,7 +2328,7 @@ GameObject:
   - component: {fileID: 754375320}
   - component: {fileID: 754375321}
   m_Layer: 0
-  m_Name: "\u666E\u901A\u653B\u64CA\u65AC\u64CA\u6548\u679C"
+  m_Name: normalAttackSlash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2662,13 +2662,13 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
-  isGrounded: 1
+  isGrounded: 0
   moveSpeed: 7
   dashForce: 0
   dashCooldownDuration: 0
   canDashInAir: 0
   onDashCooldown: 0
-  jumpForce: 10
+  jumpForce: 30
   playingFootstepSound: 0
   onAttackCooldown: 0
   normalAttack:
