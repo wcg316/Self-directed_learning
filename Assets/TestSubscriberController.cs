@@ -1,16 +1,31 @@
+using System;
 using UnityEngine;
 
-public class TestSubscriberController
+public class TestSubscriberController : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+
     void Start()
     {
-
+        InputManager.Instance.OnMove += OnMove;
     }
 
-    // Update is called once per frame
-    void Update()
+    void OnMove(Direction direction)
     {
-
+        switch (direction)
+        {
+            case Direction.Up:
+                Debug.Log("Move Up");
+                break;
+            case Direction.Down:
+                Debug.Log("Move Down");
+                break;
+            case Direction.Left:
+                Debug.Log("Move Left");
+                break;
+            case Direction.Right:
+                Debug.Log("Move Right");
+                break;
+        }
     }
 }
