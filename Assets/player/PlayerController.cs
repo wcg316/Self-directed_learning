@@ -127,7 +127,7 @@ public class PlayerController : MonoBehaviour
     private int horizontalDirectionMultiplier = 1;
     public bool isGrounded = true;
     public float moveSpeed;
-    public float dashForce;
+    public float dashForce = 60f;
     private const float DASH_DURATION = 0.15f;
     private bool isDashing = false;
     public float dashCooldownDuration;
@@ -188,7 +188,7 @@ public class PlayerController : MonoBehaviour
     {
         isGrounded = CheckIfIsGrounded();
         moveSpeed = 10f;
-        dashForce = 100f;
+        dashForce = 60f;
         jumpForce = 30f;
         dashCooldownDuration = 0.5f;
     }
