@@ -202,18 +202,26 @@ public class PlayerController : MonoBehaviour
 
     void Move(Direction direction)
     {
-        FaceDirection(direction);
-        SetHorizontalDirectionMultiplier();
-        AdjustColliderWhileRunning(direction);
-        MoveForwardWithSpeed(
-            moveSpeed * Time.deltaTime * horizontalDirectionMultiplier
-        );
-
-        PlayAnimation("run");
-
-        if (isGrounded)
+        bool playerCanMove = !isDashing;
+        if (playerCanMove)
         {
-            PlayFootstepSound(footstepSounds, 0);
+            FaceDirection(direction);
+            SetHorizontalDirectionMultiplier();
+            AdjustColliderWhileRunning(direction);
+            MoveForwardWithSpeed(
+                moveSpeed * Time.deltaTime * horizontalDirectionMultiplier
+            );
+
+            PlayAnimation("run");
+
+            if (isGrounded)
+            {
+                PlayFootstepSound(footstepSounds, 0);
+            }
+        }
+        else
+        {
+            StopMoving();
         }
     }
 
