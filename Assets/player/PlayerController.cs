@@ -3,14 +3,6 @@ using System.Collections;
 using static UnityEngine.Random;
 using Unity.Collections;
 
-public enum Direction
-{
-    Up,
-    Down,
-    Left,
-    Right
-}
-
 public enum ColliderShape
 {
     Stand,
