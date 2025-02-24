@@ -1,9 +1,11 @@
+using System;
 using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
     public static InputManager Instance { get; private set; }
-    void Start()
+
+    void Awake()
     {
         Initialize();
     }
