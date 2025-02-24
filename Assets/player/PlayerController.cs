@@ -295,11 +295,11 @@ public class PlayerController : MonoBehaviour
     {
         if (sounds.Length > idx && !isPlayingFootstepSound)
         {
-            StartCoroutine(FootstepSoundCoroutie(sounds[idx]));
+            StartCoroutine(FootstepSoundCoroutine(sounds[idx]));
         }
     }
 
-    IEnumerator FootstepSoundCoroutie(AudioClip sound)
+    IEnumerator FootstepSoundCoroutine(AudioClip sound)
     {
         isPlayingFootstepSound = true;
         footstepSoundSource.PlayOneShot(sound);
