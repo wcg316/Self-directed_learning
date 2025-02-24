@@ -110,7 +110,7 @@ public class PlayerController : MonoBehaviour
     public static PlayerController Instance;
     private ColliderController colliderController;
     private PlayerAnimation playerAnimation;
-    InputManager inputManager = InputManager.Instance;
+    InputManager inputManager;
     public AudioSource footstepSoundSource;
     public AudioClip[] footstepSounds;
     private float footstepSoundInterval = 0.35f;
@@ -139,15 +139,32 @@ public class PlayerController : MonoBehaviour
     {
         colliderController = GetComponent<ColliderController>();
         playerAnimation = GetComponent<PlayerAnimation>();
-        footstepSoundSource.volume = 0.1f;
-        transform.position = new Vector2(0f, -0.45f);
         body = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
+
+        inputManager = InputManager.Instance;
+
+        footstepSoundSource.volume = 0.1f;
+        transform.position = new Vector2(0f, -0.45f);
+
         groundLayer = LayerMask.GetMask("Ground");
+
         normalAttack.Initialize();
         dashDust.Initialize();
+
         colliderController.InitializeColliders();
+
+        SubscribeToInputEvents();
+    }
+
+    void SubscribeToInputEvents()
+    {
+        inputManager.OnMovePressed += Move;
+        inputManager.OnMoveReleased += StopMovement;
+        inputManager.OnJumpPressed += Jump;
+        inputManager.OnDashPressed += Dash;
+        inputManager.OnAttackPressed += Attack;
     }
 
     void Update()
@@ -155,19 +172,11 @@ public class PlayerController : MonoBehaviour
         ForTesting();
 
         Variable();
-        Move();
-        Jump();
-        Dash();
-        Attack();
         Die();
     }
 
     void ForTesting()
     {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            TeleportToOrigin();
-        }
         Debug.DrawRay(transform.position, Vector2.down * EXTRA_HEIGHT, Color.red);
     }
 
@@ -186,25 +195,7 @@ public class PlayerController : MonoBehaviour
         dashCooldownDuration = 0.5f;
     }
 
-    void Move()
-    {
-        bool canMove = !isDashing;
-
-        if (Input.GetKey(KeyCode.D) && canMove)
-        {
-            MoveInDirection(Direction.Right);
-        }
-        else if (Input.GetKey(KeyCode.A) && canMove)
-        {
-            MoveInDirection(Direction.Left);
-        }
-        else
-        {
-            StopMovement();
-        }
-    }
-
-    void MoveInDirection(Direction direction)
+    void Move(Direction direction)
     {
         FaceDirection(direction);
         SetHorizontalDirectionMultiplier();
