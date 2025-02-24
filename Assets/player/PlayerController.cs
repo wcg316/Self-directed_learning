@@ -155,13 +155,18 @@ public class PlayerController : MonoBehaviour
 
         colliderController.InitializeColliders();
 
+        SubscribeToEvents();
+    }
+
+    void SubscribeToEvents()
+    {
         SubscribeToInputEvents();
     }
 
     void SubscribeToInputEvents()
     {
         inputManager.OnMovePressed += Move;
-        inputManager.OnMoveReleased += StopMovement;
+        inputManager.OnMoveReleased += StopMoving;
         inputManager.OnJumpPressed += Jump;
         inputManager.OnDashPressed += Dash;
         inputManager.OnAttackPressed += Attack;
@@ -252,7 +257,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void StopMovement()
+    void StopMoving()
     {
         AdjustColliderTo(ColliderShape.Stand);
 
