@@ -397,7 +397,6 @@ public class PlayerController : MonoBehaviour
 
         if (playerAttacked)
         {
-            Direction direction = GetHorizontalDirection();
             StartCoroutine(EffectCoroutine(normalAttack));
         }
     }
