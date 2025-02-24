@@ -124,6 +124,7 @@ public class PlayerController : MonoBehaviour
     private bool isPlayingFootstepSound = false;
     public LayerMask groundLayer;
     private const float EXTRA_HEIGHT = 1.4f;
+    private int horizontalDirectionMultiplier = 1;
     public bool isGrounded = true;
     public float moveSpeed;
     public float dashForce;
@@ -213,9 +214,10 @@ public class PlayerController : MonoBehaviour
     void MoveInDirection(Direction direction)
     {
         FaceDirection(direction);
+        SetHorizontalDirectionMultiplier();
         AdjustColliderWhileRunning(direction);
         MoveForwardWithSpeed(
-            moveSpeed * Time.deltaTime * GetHorizontalDirectionMultiplier(direction)
+            moveSpeed * Time.deltaTime * horizontalDirectionMultiplier
         );
 
         PlayAnimation("run");
@@ -230,6 +232,12 @@ public class PlayerController : MonoBehaviour
     {
         // 因為true代表向左，false代表向右
         spriteRenderer.flipX = direction == Direction.Left;
+    }
+
+    void SetHorizontalDirectionMultiplier()
+    {
+        horizontalDirectionMultiplier =
+            spriteRenderer.flipX ? -1 : 1;
     }
 
     void AdjustColliderWhileRunning(Direction direction)
@@ -271,16 +279,6 @@ public class PlayerController : MonoBehaviour
     void MoveForwardWithSpeed(float speed)
     {
         transform.Translate(speed, 0, 0);
-    }
-
-    int GetHorizontalDirectionMultiplier(Direction direction)
-    {
-        return direction switch
-        {
-            Direction.Right => 1,
-            Direction.Left => -1,
-            _ => 0
-        };
     }
 
     void PlayAnimation(string name)
@@ -406,7 +404,7 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator EffectCoroutine(EffectProperties effect, Direction direction)
     {
-        effect.SetHorizontalDirectionMultiplier(GetHorizontalDirectionMultiplier(direction));
+        effect.SetHorizontalDirectionMultiplier(horizontalDirectionMultiplier);
 
         effect.SetPositionFrom(transform);
         effect.SetAngle();
