@@ -2,15 +2,26 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public static InputManager Instance { get; private set; }
     void Start()
     {
-        
+        Initialize();
     }
 
-    // Update is called once per frame
+    void Initialize()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     void Update()
     {
-        
+
     }
 }
