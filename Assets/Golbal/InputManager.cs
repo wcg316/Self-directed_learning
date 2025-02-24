@@ -13,7 +13,11 @@ public class InputManager : MonoBehaviour
 {
     public static InputManager Instance { get; private set; }
 
-    public event Action<Direction> OnMove;
+    public event Action<Direction> OnMovePressed;
+    public event Action OnMoveReleased;
+    public event Action OnJumpPressed;
+    public event Action OnDashPressed;
+    public event Action OnAttackPressed;
 
     void Awake()
     {
@@ -34,21 +38,50 @@ public class InputManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.W))
+        HandleMove();
+        HandleJump();
+        HandleDash();
+        HandleAttack();
+    }
+
+    void HandleMove()
+    {
+        if (Input.GetKey(KeyCode.A))
         {
-            OnMove?.Invoke(Direction.Up);
+            OnMovePressed?.Invoke(Direction.Left);
         }
-        else if (Input.GetKeyDown(KeyCode.S))
+        else if (Input.GetKey(KeyCode.D))
         {
-            OnMove?.Invoke(Direction.Down);
+            OnMovePressed?.Invoke(Direction.Right);
         }
-        else if (Input.GetKeyDown(KeyCode.A))
+        else
         {
-            OnMove?.Invoke(Direction.Left);
-        }
-        else if (Input.GetKeyDown(KeyCode.D))
-        {
-            OnMove?.Invoke(Direction.Right);
+            OnMoveReleased?.Invoke();
         }
     }
+
+    void HandleJump()
+    {
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            OnJumpPressed?.Invoke();
+        }
+    }
+
+    void HandleDash()
+    {
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            OnDashPressed?.Invoke();
+        }
+    }
+
+    void HandleAttack()
+    {
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            OnAttackPressed?.Invoke();
+        }
+    }
+
 }

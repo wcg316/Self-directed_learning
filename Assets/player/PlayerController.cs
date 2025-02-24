@@ -110,6 +110,7 @@ public class PlayerController : MonoBehaviour
     public static PlayerController Instance;
     private ColliderController colliderController;
     private PlayerAnimation playerAnimation;
+    InputManager inputManager = InputManager.Instance;
     public AudioSource footstepSoundSource;
     public AudioClip[] footstepSounds;
     private float footstepSoundInterval = 0.35f;
