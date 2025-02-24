@@ -329,9 +329,8 @@ public class PlayerController : MonoBehaviour
     void Jump()
     {
         bool playerCanJump = CheckIfPlayerCanJump();
-        bool playerJumped = Input.GetKeyDown(KeyCode.W) && playerCanJump;
 
-        if (playerJumped)
+        if (playerCanJump)
         {
             ClearVerticalForce();
             ApplyImpulseForceToDirection(jumpForce, Direction.Up);
@@ -371,9 +370,8 @@ public class PlayerController : MonoBehaviour
     void Dash()
     {
         bool playerCanDash = CheckIfPlayerCanDash();
-        bool playerDashed = Input.GetKeyDown(KeyCode.K) && playerCanDash;
 
-        if (playerDashed)
+        if (playerCanDash)
         {
             StartCoroutine(DashCoroutine());
         }
@@ -409,9 +407,9 @@ public class PlayerController : MonoBehaviour
 
     void Attack()
     {
-        bool playerAttacked = Input.GetKeyDown(KeyCode.J) && !normalAttack.OnCooldown;
+        bool playerCanAttack = !normalAttack.OnCooldown;
 
-        if (playerAttacked)
+        if (playerCanAttack)
         {
             StartCoroutine(EffectCoroutine(normalAttack));
         }
