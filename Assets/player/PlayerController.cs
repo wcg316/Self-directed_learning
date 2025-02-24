@@ -158,6 +158,11 @@ public class PlayerController : MonoBehaviour
         SubscribeToEvents();
     }
 
+    void OnDestroy()
+    {
+        UnsubscribeFromEvents();
+    }
+
     void SubscribeToEvents()
     {
         SubscribeToInputEvents();
@@ -170,6 +175,20 @@ public class PlayerController : MonoBehaviour
         inputManager.OnJumpPressed += Jump;
         inputManager.OnDashPressed += Dash;
         inputManager.OnAttackPressed += Attack;
+    }
+
+    void UnsubscribeFromEvents()
+    {
+        UnsubscribeFromInputEvents();
+    }
+
+    void UnsubscribeFromInputEvents()
+    {
+        inputManager.OnMovePressed -= Move;
+        inputManager.OnMoveReleased -= StopMoving;
+        inputManager.OnJumpPressed -= Jump;
+        inputManager.OnDashPressed -= Dash;
+        inputManager.OnAttackPressed -= Attack;
     }
 
     void Update()
