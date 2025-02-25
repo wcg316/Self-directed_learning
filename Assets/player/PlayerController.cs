@@ -222,6 +222,7 @@ public class PlayerController : MonoBehaviour
     void Move(Direction direction)
     {
         bool playerCanMove = !isDashing;
+
         if (playerCanMove)
         {
             FaceDirection(direction);
@@ -247,7 +248,8 @@ public class PlayerController : MonoBehaviour
     void FaceDirection(Direction direction)
     {
         // 因為true代表向左，false代表向右
-        spriteRenderer.flipX = direction == Direction.Left;
+        spriteRenderer.flipX =
+        	direction == Direction.Left;
     }
 
     void SetHorizontalDirectionMultiplier()
