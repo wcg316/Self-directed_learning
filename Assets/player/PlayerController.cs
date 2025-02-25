@@ -53,6 +53,21 @@ public class EffectProperties
         }
     }
 
+    public IEnumerator PlayEffect()
+    {
+        SetAngle();
+
+        Activate();
+        PlaySound();
+        StartCooldown();
+
+        yield return new WaitForSeconds(Duration);
+        Hide();
+
+        yield return new WaitForSeconds(CooldownDuration);
+        EndCooldown();
+    }
+
     public void Activate()
     {
         effect.SetActive(true);
@@ -158,11 +173,6 @@ public class PlayerController : MonoBehaviour
         SubscribeToEvents();
     }
 
-    void OnDestroy()
-    {
-        UnsubscribeFromEvents();
-    }
-
     void SubscribeToEvents()
     {
         SubscribeToInputEvents();
@@ -175,6 +185,10 @@ public class PlayerController : MonoBehaviour
         inputManager.OnJumpPressed += Jump;
         inputManager.OnDashPressed += Dash;
         inputManager.OnAttackPressed += Attack;
+    }
+    void OnDestroy()
+    {
+        UnsubscribeFromEvents();
     }
 
     void UnsubscribeFromEvents()
@@ -249,7 +263,7 @@ public class PlayerController : MonoBehaviour
     {
         // 因為true代表向左，false代表向右
         spriteRenderer.flipX =
-        	direction == Direction.Left;
+            direction == Direction.Left;
     }
 
     void SetHorizontalDirectionMultiplier()
@@ -368,7 +382,6 @@ public class PlayerController : MonoBehaviour
         body.AddForce(vector2 * force, ForceMode2D.Impulse);
     }
 
-
     void Dash()
     {
         bool playerCanDash = CheckIfPlayerCanDash();
@@ -413,27 +426,16 @@ public class PlayerController : MonoBehaviour
 
         if (playerCanAttack)
         {
-            StartCoroutine(EffectCoroutine(normalAttack));
+            PrepareAttack();
+
+            StartCoroutine(normalAttack.PlayEffect());
         }
     }
 
-    IEnumerator EffectCoroutine(EffectProperties effect)
+    void PrepareAttack()
     {
-        effect.SetHorizontalDirectionMultiplier(horizontalDirectionMultiplier);
-
-        effect.SetPositionFrom(transform);
-        effect.SetAngle();
-
-        effect.Activate();
-        effect.PlaySound();
-
-        effect.StartCooldown();
-
-        yield return new WaitForSeconds(effect.Duration);
-        effect.Hide();
-
-        yield return new WaitForSeconds(effect.CooldownDuration);
-        effect.EndCooldown();
+        normalAttack.SetHorizontalDirectionMultiplier(horizontalDirectionMultiplier);
+        normalAttack.SetPositionFrom(transform);
     }
 
     bool CheckIfIsGrounded()
