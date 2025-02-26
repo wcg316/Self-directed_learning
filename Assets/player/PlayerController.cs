@@ -235,9 +235,9 @@ public class PlayerController : MonoBehaviour
 
     void Move(Direction direction)
     {
-        bool playerCanMove = CheckIfPlayerCanMove();
+        bool canMove = CheckIfCanMove();
 
-        if (playerCanMove)
+        if (canMove)
         {
             FaceDirection(direction);
             SetHorizontalDirectionMultiplier();
@@ -259,7 +259,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    bool CheckIfPlayerCanMove()
+    bool CheckIfCanMove()
     {
         return !isDashing;
     }
@@ -349,16 +349,16 @@ public class PlayerController : MonoBehaviour
 
     void Jump()
     {
-        bool playerCanJump = CheckIfPlayerCanJump();
+        bool canJump = CheckIfCanJump();
 
-        if (playerCanJump)
+        if (canJump)
         {
             ClearVerticalForce();
             ApplyImpulseForceToDirection(jumpForce, Direction.Up);
         }
     }
 
-    bool CheckIfPlayerCanJump()
+    bool CheckIfCanJump()
     {
         return isGrounded && !isDashing;
     }
@@ -389,15 +389,15 @@ public class PlayerController : MonoBehaviour
 
     void Dash()
     {
-        bool playerCanDash = CheckIfPlayerCanDash();
+        bool canDash = CheckIfCanDash();
 
-        if (playerCanDash)
+        if (canDash)
         {
             StartCoroutine(DashCoroutine());
         }
     }
 
-    bool CheckIfPlayerCanDash()
+    bool CheckIfCanDash()
     {
         return !onDashCooldown && (isGrounded || canDashInAir);
     }
@@ -427,9 +427,9 @@ public class PlayerController : MonoBehaviour
 
     void Attack()
     {
-        bool playerCanAttack = !normalAttack.OnCooldown;
+        bool canAttack = !normalAttack.OnCooldown;
 
-        if (playerCanAttack)
+        if (canAttack)
         {
             PrepareAttack();
 
