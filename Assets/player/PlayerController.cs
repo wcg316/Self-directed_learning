@@ -235,7 +235,7 @@ public class PlayerController : MonoBehaviour
 
     void Move(Direction direction)
     {
-        bool playerCanMove = !isDashing;
+        bool playerCanMove = CheckIfPlayerCanMove();
 
         if (playerCanMove)
         {
@@ -257,6 +257,11 @@ public class PlayerController : MonoBehaviour
         {
             StopMoving();
         }
+    }
+
+    bool CheckIfPlayerCanMove()
+    {
+        return !isDashing;
     }
 
     void FaceDirection(Direction direction)
