@@ -464,9 +464,9 @@ public class PlayerController : MonoBehaviour
 
     void Die()
     {
-        bool playerDied = transform.position.y < -40f;
+        bool isDead = transform.position.y < -40f;
 
-        if (playerDied)
+        if (isDead)
         {
             TeleportToOrigin();
         }
