@@ -145,6 +145,23 @@ public class PlayerController : MonoBehaviour
     public EffectProperties normalAttack;
     public EffectProperties dashDust;
 
+    void Awake()
+    {
+        Initialize();
+    }
+
+    void Initialize()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     void Start()
     {
         colliderController = GetComponent<ColliderController>();
