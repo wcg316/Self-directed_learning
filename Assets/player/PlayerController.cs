@@ -68,27 +68,27 @@ public class EffectProperties
         EndCooldown();
     }
 
-    public void Activate()
+    void Activate()
     {
         effect.SetActive(true);
     }
 
-    public void Hide()
+    void Hide()
     {
         effect.SetActive(false);
     }
 
-    public void PlaySound()
+    void PlaySound()
     {
         audioSource.PlayOneShot(sound);
     }
 
-    public void StartCooldown()
+    void StartCooldown()
     {
         onCooldown = true;
     }
 
-    public void EndCooldown()
+    void EndCooldown()
     {
         onCooldown = false;
     }
@@ -104,17 +104,12 @@ public class EffectProperties
         effect.transform.localPosition = transform.position + offset;
     }
 
-    public void SetAngle()
+    void SetAngle()
     {
         int randomAngle = Range(-offsetAngle, offsetAngle + 1);
 
         effect.transform.eulerAngles =
             new Vector3(0f, 0f, baseAngle * horizonalDirectionMultiplier + randomAngle);
-    }
-
-    public Vector3 GetOffset()
-    {
-        return new Vector3(distanceX * horizonalDirectionMultiplier, 0, 0);
     }
 
 }
