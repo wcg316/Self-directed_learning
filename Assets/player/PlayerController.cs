@@ -198,6 +198,7 @@ public class PlayerController : MonoBehaviour
         inputManager.OnDashPressed += Dash;
         inputManager.OnAttackPressed += Attack;
     }
+
     void OnDestroy()
     {
         UnsubscribeFromEvents();
