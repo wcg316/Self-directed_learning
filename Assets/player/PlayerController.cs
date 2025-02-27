@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using static UnityEngine.Random;
 using Unity.Collections;
+using Unity.Burst.CompilerServices;
 
 public enum ColliderShape
 {
@@ -20,6 +21,7 @@ public class EffectProperties
     }
     AudioSource audioSource;
     [SerializeField] AudioClip sound;
+    SpriteRenderer spriteRenderer;
     int horizonalDirectionMultiplier;
     [SerializeField] int baseAngle;
     [SerializeField] int offsetAngle;
@@ -46,6 +48,8 @@ public class EffectProperties
         if (effect != null)
         {
             audioSource = effect.GetComponent<AudioSource>();
+            spriteRenderer = effect.GetComponent<SpriteRenderer>();
+
             if (audioSource == null)
                 audioSource = effect.AddComponent<AudioSource>();
 
@@ -53,9 +57,12 @@ public class EffectProperties
         }
     }
 
-    public IEnumerator PlayEffect()
+    public IEnumerator PlayEffect(int multiplier, Transform transform)
     {
+        SetHorizontalDirectionMultiplier(multiplier);
+        SetPositionFrom(transform);
         SetAngle();
+        SetDirection();
 
         Activate();
         PlaySound();
@@ -100,7 +107,9 @@ public class EffectProperties
 
     public void SetPositionFrom(Transform transform)
     {
-        Vector3 offset = new Vector3(distanceX * horizonalDirectionMultiplier, distanceY, 0f);
+        Vector3 offset =
+            new Vector3(distanceX * horizonalDirectionMultiplier, distanceY, 0f);
+
         effect.transform.localPosition = transform.position + offset;
     }
 
@@ -109,7 +118,13 @@ public class EffectProperties
         int randomAngle = Range(-offsetAngle, offsetAngle + 1);
 
         effect.transform.eulerAngles =
-            new Vector3(0f, 0f, baseAngle * horizonalDirectionMultiplier + randomAngle);
+            new Vector3(0f, 0f, baseAngle + randomAngle);
+    }
+
+    void SetDirection()
+    {
+        spriteRenderer.flipX =
+            horizonalDirectionMultiplier == -1;
     }
 
 }
@@ -423,6 +438,7 @@ public class PlayerController : MonoBehaviour
 
         ApplyImpulseForceToDirection(dashForce, direction);
         PlayAnimation("dash");
+        StartCoroutine(dashDust.PlayEffect(horizontalDirectionMultiplier, transform));
 
         yield return new WaitForSeconds(DASH_DURATION);
         ClearHorizontalForce();
@@ -444,16 +460,8 @@ public class PlayerController : MonoBehaviour
 
         if (canAttack)
         {
-            PrepareAttack();
-
-            StartCoroutine(normalAttack.PlayEffect());
+            StartCoroutine(normalAttack.PlayEffect(horizontalDirectionMultiplier, transform));
         }
-    }
-
-    void PrepareAttack()
-    {
-        normalAttack.SetHorizontalDirectionMultiplier(horizontalDirectionMultiplier);
-        normalAttack.SetPositionFrom(transform);
     }
 
     bool CheckIfIsGrounded()

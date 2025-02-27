@@ -147,7 +147,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.6, y: 18.6, z: -0.23796022}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2576,7 +2576,7 @@ GameObject:
   - component: {fileID: 982803557}
   - component: {fileID: 982803556}
   m_Layer: 0
-  m_Name: "\u8E6C\u57300_0"
+  m_Name: DashDustObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2668,9 +2668,9 @@ Transform:
   m_GameObject: {fileID: 982803555}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.18, y: -3.8, z: 0}
-  m_LocalScale: {x: 0.2954, y: 0.2954, z: 0.2954}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: 3.24, y: -2.17, z: 0}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2835,13 +2835,13 @@ MonoBehaviour:
     duration: 0.23
     cooldownDuration: 0.4
   dashDust:
-    effect: {fileID: 0}
+    effect: {fileID: 982803555}
     sound: {fileID: 0}
     baseAngle: 0
     offsetAngle: 0
-    distanceX: 0
-    distanceY: 0
-    duration: 0
+    distanceX: 1.4
+    distanceY: 0.5
+    duration: 0.18
     cooldownDuration: 0
 --- !u!68 &1979824954
 EdgeCollider2D:
