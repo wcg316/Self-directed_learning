@@ -22,7 +22,7 @@ public class EffectProperties
     AudioSource audioSource;
     [SerializeField] AudioClip sound;
     SpriteRenderer spriteRenderer;
-    int horizonalDirectionMultiplier;
+    int horizontalDirectionMultiplier;
     [SerializeField] int offsetAngle;
     [SerializeField] float distanceX;
     [SerializeField] float distanceY;
@@ -58,7 +58,7 @@ public class EffectProperties
 
     public IEnumerator PlayEffect(Transform transform)
     {
-        horizonalDirectionMultiplier = transform.localScale.x < 0 ? -1 : 1;
+        horizontalDirectionMultiplier = transform.localScale.x < 0 ? -1 : 1;
         SetPositionFrom(transform);
         SetAngle();
         SetDirection();
@@ -102,7 +102,7 @@ public class EffectProperties
     public void SetPositionFrom(Transform transform)
     {
         Vector3 offset =
-            new Vector3(distanceX * horizonalDirectionMultiplier, distanceY, 0f);
+            new Vector3(distanceX * horizontalDirectionMultiplier, distanceY, 0f);
 
         effect.transform.localPosition = transform.position + offset;
     }
@@ -118,7 +118,7 @@ public class EffectProperties
     void SetDirection()
     {
         Vector3 scale = effect.transform.localScale;
-        scale.x = Mathf.Abs(scale.x) * horizonalDirectionMultiplier;
+        scale.x = Mathf.Abs(scale.x) * horizontalDirectionMultiplier;
         effect.transform.localScale = scale;
     }
 
