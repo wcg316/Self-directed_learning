@@ -23,7 +23,6 @@ public class EffectProperties
     [SerializeField] AudioClip sound;
     SpriteRenderer spriteRenderer;
     int horizonalDirectionMultiplier;
-    [SerializeField] int baseAngle;
     [SerializeField] int offsetAngle;
     [SerializeField] float distanceX;
     [SerializeField] float distanceY;
@@ -118,13 +117,14 @@ public class EffectProperties
         int randomAngle = Range(-offsetAngle, offsetAngle + 1);
 
         effect.transform.eulerAngles =
-            new Vector3(0f, 0f, baseAngle + randomAngle);
+            new Vector3(0f, 0f, randomAngle);
     }
 
     void SetDirection()
     {
-        spriteRenderer.flipX =
-            horizonalDirectionMultiplier == -1;
+        Vector3 scale = effect.transform.localScale;
+        scale.x = Mathf.Abs(scale.x) * horizonalDirectionMultiplier;
+        effect.transform.localScale = scale;
     }
 
 }
@@ -294,15 +294,15 @@ public class PlayerController : MonoBehaviour
 
     void FaceDirection(Direction direction)
     {
-        // 因為true代表向左，false代表向右
-        spriteRenderer.flipX =
-            direction == Direction.Left;
+        Vector3 scale = transform.localScale;
+        scale.x = Mathf.Abs(scale.x) * (direction == Direction.Left ? -1 : 1);
+        transform.localScale = scale;
     }
 
     void SetHorizontalDirectionMultiplier()
     {
         horizontalDirectionMultiplier =
-            spriteRenderer.flipX ? -1 : 1;
+            transform.localScale.x < 0 ? -1 : 1;
     }
 
     void AdjustColliderWhileRunning(Direction direction)
@@ -451,7 +451,7 @@ public class PlayerController : MonoBehaviour
 
     Direction GetHorizontalDirection()
     {
-        return spriteRenderer.flipX ? Direction.Left : Direction.Right;
+        return transform.localScale.x < 0 ? Direction.Left : Direction.Right;
     }
 
     void Attack()
