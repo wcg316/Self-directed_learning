@@ -56,9 +56,9 @@ public class EffectProperties
         }
     }
 
-    public IEnumerator PlayEffect(int multiplier, Transform transform)
+    public IEnumerator PlayEffect(Transform transform)
     {
-        SetHorizontalDirectionMultiplier(multiplier);
+        horizonalDirectionMultiplier = transform.localScale.x < 0 ? -1 : 1;
         SetPositionFrom(transform);
         SetAngle();
         SetDirection();
@@ -97,11 +97,6 @@ public class EffectProperties
     void EndCooldown()
     {
         onCooldown = false;
-    }
-
-    public void SetHorizontalDirectionMultiplier(int multiplier)
-    {
-        horizonalDirectionMultiplier = multiplier;
     }
 
     public void SetPositionFrom(Transform transform)
@@ -438,7 +433,7 @@ public class PlayerController : MonoBehaviour
 
         ApplyImpulseForceToDirection(dashForce, direction);
         PlayAnimation("dash");
-        StartCoroutine(dashDust.PlayEffect(horizontalDirectionMultiplier, transform));
+        StartCoroutine(dashDust.PlayEffect(transform));
 
         yield return new WaitForSeconds(DASH_DURATION);
         ClearHorizontalForce();
@@ -460,7 +455,7 @@ public class PlayerController : MonoBehaviour
 
         if (canAttack)
         {
-            StartCoroutine(normalAttack.PlayEffect(horizontalDirectionMultiplier, transform));
+            StartCoroutine(normalAttack.PlayEffect(transform));
         }
     }
 
