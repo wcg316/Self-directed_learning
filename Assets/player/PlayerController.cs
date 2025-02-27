@@ -59,6 +59,7 @@ public class EffectProperties
     public IEnumerator PlayEffect(Transform transform)
     {
         horizontalDirectionMultiplier = transform.localScale.x < 0 ? -1 : 1;
+
         SetPositionFrom(transform);
         SetAngle();
         SetDirection();
