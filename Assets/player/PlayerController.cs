@@ -21,7 +21,6 @@ public class EffectProperties
     }
     AudioSource audioSource;
     [SerializeField] AudioClip sound;
-    SpriteRenderer spriteRenderer;
     int horizontalDirectionMultiplier;
     [SerializeField] int offsetAngle;
     [SerializeField] float distanceX;
@@ -47,7 +46,6 @@ public class EffectProperties
         if (effect != null)
         {
             audioSource = effect.GetComponent<AudioSource>();
-            spriteRenderer = effect.GetComponent<SpriteRenderer>();
 
             if (audioSource == null)
                 audioSource = effect.AddComponent<AudioSource>();
@@ -150,7 +148,6 @@ public class PlayerController : MonoBehaviour
     public float jumpForce;
     public bool playingFootstepSound;
     private Rigidbody2D body;
-    private SpriteRenderer spriteRenderer;
     private Animator animator;
     public bool onAttackCooldown = false;
     public EffectProperties normalAttack;
@@ -178,7 +175,6 @@ public class PlayerController : MonoBehaviour
         colliderController = GetComponent<ColliderController>();
         playerAnimation = GetComponent<PlayerAnimation>();
         body = GetComponent<Rigidbody2D>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
 
         inputManager = InputManager.Instance;
