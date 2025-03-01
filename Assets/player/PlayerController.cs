@@ -175,6 +175,7 @@ public class PlayerController : MonoBehaviour
     void FaceDirection(Direction direction)
     {
         Vector3 scale = transform.localScale;
+
         scale.x = Mathf.Abs(scale.x) * (direction == Direction.Left ? -1 : 1);
         transform.localScale = scale;
     }

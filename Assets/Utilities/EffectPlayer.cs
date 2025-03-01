@@ -49,7 +49,7 @@ public class EffectPlayer
 
 	public IEnumerator PlayEffect(Transform transform)
 	{
-		horizontalDirectionMultiplier = transform.localScale.x < 0 ? -1 : 1;
+		horizontalDirectionMultiplier = transform.localScale.x < 0f ? -1 : 1;
 
 		SetPositionFrom(transform);
 		SetAngle();
@@ -110,6 +110,7 @@ public class EffectPlayer
 	void SetDirection()
 	{
 		Vector3 scale = effect.transform.localScale;
+
 		scale.x = Mathf.Abs(scale.x) * horizontalDirectionMultiplier;
 		effect.transform.localScale = scale;
 	}
