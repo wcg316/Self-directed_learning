@@ -350,7 +350,7 @@ public class PlayerController : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, EXTRA_HEIGHT, groundLayer);
 
         return hit.collider != null;
-    
+    }
 
     void Die()
     {
