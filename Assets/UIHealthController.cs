@@ -1,24 +1,41 @@
+using Mono.Cecil.Cil;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+
 public class UIHealthController : MonoBehaviour
 {
     public Image fillImage;
-    private float maxHealth = 100;
-    private float currentHealth;
+    private float maxHealth = 100f;
+    private float currentHealth = 0f;
+
     void Start()
     {
         currentHealth = maxHealth;
         UpdateUIHealthController();
     }
-    public void TakeDamage(float damge)
+
+    public void TakeDamage(float damage)
     {
-        currentHealth -= damge;
+        currentHealth -= damage;
         currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
         UpdateUIHealthController();
     }
+
     private void UpdateUIHealthController()
     {
-        fillImage.fillAmount = currentHealth / maxHealth;
+        if (fillImage != null)
+        {
+            fillImage.fillAmount = currentHealth / maxHealth;
+        }
     }
+
+    /*void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            TakeDamage(50f);
+        }
+    }*/
+
 }
