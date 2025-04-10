@@ -9,5 +9,5 @@ public class HealthController
     {
         maxHealth = health;
         currentHealth = maxHealth;
-    }
+    }   
 }
