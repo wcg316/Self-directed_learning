@@ -7,7 +7,7 @@ public class UIHealthController : MonoBehaviour
 {
     public Image fillImage;
     private float maxHealth = 100f;
-    private float currentHealth = 0f;
+    private float currentHealth = 100f;
 
     void Start()
     {
@@ -30,12 +30,13 @@ public class UIHealthController : MonoBehaviour
         }
     }
 
-    /*void Update()
+    void Update()
     {
+        fillImage = this.gameObject.GetComponent<Image>();
         if (Input.GetKeyDown(KeyCode.H))
         {
             TakeDamage(50f);
         }
-    }*/
+    }
 
 }
