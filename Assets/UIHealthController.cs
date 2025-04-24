@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class UIHealthController : MonoBehaviour
 {
-    public Image fillImage;
+    public Transform bar;
     private float maxHealth = 100f;
     private float currentHealth = 100f;
 
@@ -24,15 +24,14 @@ public class UIHealthController : MonoBehaviour
 
     private void UpdateUIHealthController()
     {
-        if (fillImage != null)
-        {
-            fillImage.fillAmount = currentHealth / maxHealth;
-        }
+        float ratio = currentHealth / maxHealth;
+        Vector3 scale = bar.localScale;
+        scale.x = ratio;
+        bar.localScale = scale;
     }
 
     void Update()
     {
-        fillImage = this.gameObject.GetComponent<Image>();
         if (Input.GetKeyDown(KeyCode.H))
         {
             TakeDamage(50f);
