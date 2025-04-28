@@ -1,6 +1,6 @@
 using UnityEngine;
 
-enum EnemyStates
+enum NormalEnemyStates
 {
 	Born,
 	Partol,
