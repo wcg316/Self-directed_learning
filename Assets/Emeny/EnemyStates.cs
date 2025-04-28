@@ -5,6 +5,6 @@ enum EnemyStates
 	Born,
 	Partol,
 	Track,
-	Attack
-
+	Attack,
+	Die
 }
