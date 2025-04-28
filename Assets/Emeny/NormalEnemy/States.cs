@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace NormalEnemy
 {
-	enum States
+	public enum States
 	{
 		Born,
 		Partol,
