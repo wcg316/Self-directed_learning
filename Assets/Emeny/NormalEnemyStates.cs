@@ -1,10 +1,13 @@
 using UnityEngine;
 
-enum NormalEnemyStates
+namespace NormalEnemy
 {
-	Born,
-	Partol,
-	Track,
-	Attack,
-	Die
+	enum States
+	{
+		Born,
+		Partol,
+		Track,
+		Attack,
+		Die
+	}
 }
