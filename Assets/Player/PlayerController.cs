@@ -359,8 +359,8 @@ public class PlayerController : MonoBehaviour
         if (isDead)
         {
             TeleportToOrigin();
-            //UIHealthController uIHealthController = new UIHealthController();
-            //uIHealthController.TakeDamage(100f);
+            // UIHealthController uIHealthController = new UIHealthController();
+            // uIHealthController.TakeDamage(100f);
         }
     }
 
