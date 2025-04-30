@@ -6,7 +6,7 @@ namespace NormalEnemy
 	{
 		Born,
 		Partol,
-		Track,
+		Chase,
 		Attack,
 		Die
 	}
