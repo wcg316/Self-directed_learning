@@ -7,12 +7,12 @@ public class HitHealthController : MonoBehaviour
 {
     public Image fillImage;
     private float maxHealth = 100f;
-    private float copyCurrentHealth = 100f;
+    private float redHealth = 100f;
     private float currentHealth = 100f;
 
     void Start()
     {
-        copyCurrentHealth = maxHealth;
+        redHealth = maxHealth;
         currentHealth = maxHealth;
         UpdateHealthController();
     }
@@ -20,12 +20,12 @@ public class HitHealthController : MonoBehaviour
     public void TakeDamage(float damage)
     {
         currentHealth -= damage;
-        currentHealth = Mathf.Clamp(copyCurrentHealth, 0f, maxHealth);
+        currentHealth = Mathf.Clamp(redHealth, 0f, maxHealth);
     }
     public void Reducing()
     {
-        copyCurrentHealth -= 1f;
-        copyCurrentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
+        redHealth -= 1f;
+        redHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
         UpdateHealthController();
     }
 
@@ -33,7 +33,7 @@ public class HitHealthController : MonoBehaviour
     {
         if (fillImage != null)
         {
-            fillImage.fillAmount = copyCurrentHealth / maxHealth;
+            fillImage.fillAmount = redHealth / maxHealth;
         }
     }
 
@@ -43,7 +43,7 @@ public class HitHealthController : MonoBehaviour
         {
             TakeDamage(5f);
         }
-        if (copyCurrentHealth > currentHealth)
+        if (redHealth > currentHealth)
         {
             Reducing();
         }
