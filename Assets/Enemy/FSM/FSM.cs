@@ -5,7 +5,11 @@ public class FSM<T>
 {
     IState<T> currentInstance;
     Dictionary<T, IState<T>> instances = new();
-    public T CurrentState { get; private set; }
+    public T CurrentState
+    {
+        get;
+        private set;
+    }
 
     public void AddState(T state, IState<T> instance)
     {
