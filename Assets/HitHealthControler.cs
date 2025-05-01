@@ -20,12 +20,13 @@ public class HitHealthController : MonoBehaviour
     public void TakeDamage(float damage)
     {
         currentHealth -= damage;
-        currentHealth = Mathf.Clamp(redHealth, 0f, maxHealth);
+        currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
     }
     public void Reducing()
     {
-        redHealth -= 1f;
-        redHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
+        Debug.Log("123");
+        redHealth -= 0.03f;
+        redHealth = Mathf.Clamp(redHealth, 0f, maxHealth);
         UpdateHealthController();
     }
 
@@ -42,11 +43,15 @@ public class HitHealthController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.H))
         {
             TakeDamage(5f);
+            Debug.Log(currentHealth);
+            Debug.Log(redHealth);
         }
         if (redHealth > currentHealth)
         {
+
             Reducing();
         }
+
     }
 
 }
