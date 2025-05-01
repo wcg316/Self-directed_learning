@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Enemy2
 {
-	public enum States
+	public enum State
 	{
 		Born,
 		Partol,
