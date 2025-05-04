@@ -19,7 +19,7 @@ namespace Enemy1
 
 		}
 
-		public void Execute()
+		public void Execute(FSM<State> fsm)
 		{
 
 		}
