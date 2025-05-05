@@ -24,7 +24,7 @@ public class FSM<T>
         currentInstance.Enter();
     }
 
-    public void Execute(FSM<T> fsm)
+    public void Execute()
     {
         currentInstance?.Execute(this);
     }
