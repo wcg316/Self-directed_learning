@@ -8,7 +8,7 @@ namespace Enemy1
 		Transform self;
 		Transform player;
 
-		BornState(Transform self, Transform player)
+		public BornState(Transform self, Transform player)
 		{
 			this.self = self;
 			this.player = player;

@@ -8,7 +8,7 @@ namespace Enemy1
 		Transform self;
 		Transform player;
 
-		ChaseState(Transform self, Transform player)
+		public ChaseState(Transform self, Transform player)
 		{
 			this.self = self;
 			this.player = player;

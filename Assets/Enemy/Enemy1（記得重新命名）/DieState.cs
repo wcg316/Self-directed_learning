@@ -8,7 +8,7 @@ namespace Enemy1
 		Transform self;
 		Transform player;
 
-		DieState(Transform self, Transform player)
+		public DieState(Transform self, Transform player)
 		{
 			this.self = self;
 			this.player = player;
