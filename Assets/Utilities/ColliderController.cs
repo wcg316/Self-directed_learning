@@ -1,6 +1,13 @@
 using UnityEngine;
 using UnityEngine.UIElements.Experimental;
 
+public enum ColliderShape
+{
+    Stand,
+    RunRight,
+    RunLeft
+}
+
 [System.Serializable]
 public class NamedCollider
 {

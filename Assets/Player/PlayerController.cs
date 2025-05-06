@@ -4,13 +4,6 @@ using static UnityEngine.Random;
 using Unity.Collections;
 using Unity.Burst.CompilerServices;
 
-public enum ColliderShape
-{
-    Stand,
-    RunRight,
-    RunLeft
-}
-
 [System.Serializable]
 public class PlayerController : MonoBehaviour
 {
