@@ -10,6 +10,7 @@ namespace Enemy1
 		void Start()
 		{
 			LoadStates();
+			Enemy1AI.ChangeStateTo(State.Born);
 		}
 
 		void LoadStates()
