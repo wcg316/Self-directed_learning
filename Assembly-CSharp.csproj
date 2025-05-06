@@ -87,6 +87,7 @@
     <Compile Include="Assets\Enemy\Enemy3（記得重新命名）\ChaseState.cs" />
     <Compile Include="Assets\Enemy\FSM\FSM.cs" />
     <Compile Include="Assets\Utilities\EffectPlayer.cs" />
+    <Compile Include="Assets\Enemy\Enemy1（記得重新命名）\Enemy1Controller.cs" />
     <Compile Include="Assets\Enemy\Enemy1（記得重新命名）\ChaseState.cs" />
     <Compile Include="Assets\Enemy\Enemy3（記得重新命名）\DieState.cs" />
     <Compile Include="Assets\Global\InputManager.cs" />
