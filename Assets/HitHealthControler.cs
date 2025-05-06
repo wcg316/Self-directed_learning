@@ -1,4 +1,5 @@
 using Mono.Cecil.Cil;
+using Unity.Mathematics.Geometry;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,23 +10,27 @@ public class HitHealthController : MonoBehaviour
     private float maxHealth = 100f;
     private float redHealth = 100f;
     private float currentHealth = 100f;
+    private float lastDamage = 0f;
+    private InputManager inputManager;
 
     void Start()
     {
         redHealth = maxHealth;
         currentHealth = maxHealth;
+        inputManager = InputManager.Instance;
+        inputManager.OnPlayerHurt += TakeDamage;
         UpdateHealthController();
     }
 
     public void TakeDamage(float damage)
     {
+        lastDamage = Mathf.Max(lastDamage, damage);
         currentHealth -= damage;
         currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
     }
     public void Reducing()
     {
-        Debug.Log("123");
-        redHealth -= 0.03f;
+        redHealth -= lastDamage * 0.006f;
         redHealth = Mathf.Clamp(redHealth, 0f, maxHealth);
         UpdateHealthController();
     }
@@ -40,18 +45,10 @@ public class HitHealthController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            TakeDamage(5f);
-            Debug.Log(currentHealth);
-            Debug.Log(redHealth);
-        }
         if (redHealth > currentHealth)
         {
-
             Reducing();
         }
-
     }
 
 }

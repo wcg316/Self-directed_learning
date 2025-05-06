@@ -1,4 +1,5 @@
 using System;
+using JetBrains.Annotations;
 using UnityEngine;
 
 public enum Direction
@@ -18,6 +19,7 @@ public class InputManager : MonoBehaviour
     public event Action OnJumpPressed;
     public event Action OnDashPressed;
     public event Action OnAttackPressed;
+    public event Action<float> OnPlayerHurt;
 
     void Awake()
     {
@@ -42,6 +44,7 @@ public class InputManager : MonoBehaviour
         HandleJump();
         HandleDash();
         HandleAttack();
+        HandlePlayHurt();
     }
 
     void HandleMove()
@@ -81,6 +84,18 @@ public class InputManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.J))
         {
             OnAttackPressed?.Invoke();
+        }
+    }
+
+    void HandlePlayHurt()
+    {
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            OnPlayerHurt?.Invoke(5f);
+        }
+        if (Input.GetKeyDown(KeyCode.N))
+        {
+            OnPlayerHurt?.Invoke(45f);
         }
     }
 

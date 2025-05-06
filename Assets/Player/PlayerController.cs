@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     public static PlayerController Instance;
     private ColliderController colliderController;
     private PlayerAnimation playerAnimation;
-    InputManager inputManager;
+    private InputManager inputManager;
     public AudioSource footstepSoundSource;
     public AudioClip[] footstepSounds;
     private float footstepSoundInterval = 0.35f;
