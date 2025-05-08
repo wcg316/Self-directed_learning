@@ -65,7 +65,7 @@ public class InputManager : MonoBehaviour
 
     void HandleJump()
     {
-        if (Input.GetKeyDown(KeyCode.W))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             OnJumpPressed?.Invoke();
         }
