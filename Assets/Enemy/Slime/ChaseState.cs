@@ -21,7 +21,7 @@ namespace Slime
 
 		public void Execute(FSM<State> EnemyAI)
 		{
-
+			// RaycastHit2D detector = Physics2D.Raycast();
 		}
 
 		public void Exit()

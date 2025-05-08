@@ -19,6 +19,7 @@ public class InputManager : MonoBehaviour
     public event Action OnJumpPressed;
     public event Action OnDashPressed;
     public event Action OnAttackPressed;
+    public event Action OnClimbPressed;
     public event Action<float> OnPlayerHurt;
 
     void Awake()
@@ -44,6 +45,7 @@ public class InputManager : MonoBehaviour
         HandleJump();
         HandleDash();
         HandleAttack();
+        HandleClimb();
         HandlePlayHurt();
     }
 
@@ -76,6 +78,20 @@ public class InputManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.K))
         {
             OnDashPressed?.Invoke();
+        }
+    }
+
+    void HandleClimb()
+    {
+        bool playerTouchedRope = false;
+
+        if (playerTouchedRope && Input.GetKeyDown(KeyCode.W))
+        {
+
+        }
+        else if (playerTouchedRope && Input.GetKeyDown(KeyCode.S))
+        {
+
         }
     }
 
