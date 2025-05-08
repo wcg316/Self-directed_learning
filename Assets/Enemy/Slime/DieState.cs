@@ -1,14 +1,14 @@
 using UnityEditorInternal;
 using UnityEngine;
 
-namespace Enemy1
+namespace Slime
 {
-	public class AttackState : IState<State>
+	public class DieState : IState<State>
 	{
 		Transform self;
 		Transform player;
 
-		public AttackState(Transform self, Transform player)
+		public DieState(Transform self, Transform player)
 		{
 			this.self = self;
 			this.player = player;
