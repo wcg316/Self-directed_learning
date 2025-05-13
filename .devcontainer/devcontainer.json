@@ -1,0 +1,4 @@
+{
+  "name": "Unity IntelliSense",
+  "postCreateCommand": "./.devcontainer/postCreateCommand.sh"
+}
