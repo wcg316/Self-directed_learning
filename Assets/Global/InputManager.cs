@@ -14,6 +14,8 @@ public class InputManager : MonoBehaviour
 {
     public static InputManager Instance { get; private set; }
 
+    private PlayerStatus playerStatus;
+
     public event Action<Direction> OnMovePressed;
     public event Action OnMoveReleased;
     public event Action OnJumpPressed;
@@ -37,6 +39,11 @@ public class InputManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    void Start()
+    {
+        playerStatus = PlayerStatus.Instance;
     }
 
     void Update()
@@ -83,13 +90,11 @@ public class InputManager : MonoBehaviour
 
     void HandleClimb()
     {
-        bool playerTouchedRope = false;
-
-        if (playerTouchedRope && Input.GetKeyDown(KeyCode.W))
+        if (playerStatus.TouchedRope && Input.GetKeyDown(KeyCode.W))
         {
 
         }
-        else if (playerTouchedRope && Input.GetKeyDown(KeyCode.S))
+        else if (playerStatus.TouchedRope && Input.GetKeyDown(KeyCode.S))
         {
 
         }

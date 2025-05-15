@@ -111,6 +111,15 @@ public class PlayerStatus : MonoBehaviour
             jumpForce = value;
         }
     }
+    private bool touchedRope = false;
+    public bool TouchedRope
+    {
+        get => touchedRope;
+        set
+        {
+            touchedRope = value;
+        }
+    }
 
     // others
 }
