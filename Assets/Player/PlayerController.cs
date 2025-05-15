@@ -19,13 +19,7 @@ public class PlayerController : MonoBehaviour
     public LayerMask groundLayer;
     private const float EXTRA_HEIGHT = 1.4f;
     private int horizontalDirectionMultiplier = 1;
-    public float dashForce = 60f;
     private const float DASH_DURATION = 0.15f;
-    private bool isDashing = false;
-    public float dashCooldownDuration;
-    public bool canDashInAir = false;
-    public bool onDashCooldown = false;
-    public float jumpForce;
     public bool playingFootstepSound;
     private Rigidbody2D body;
     private Animator animator;
@@ -136,9 +130,9 @@ public class PlayerController : MonoBehaviour
         {
             Debug.LogError("PlayerStatus is not initialized.");
         }
-        dashForce = 60f;
-        jumpForce = 30f;
-        dashCooldownDuration = 0.5f;
+        status.DashForce = 60f;
+        status.JumpForce = 30f;
+        status.DashCooldownDuration = 0.5f;
     }
 
     void Move(Direction direction)
@@ -169,7 +163,7 @@ public class PlayerController : MonoBehaviour
 
     bool CheckIfCanMove()
     {
-        return !isDashing;
+        return !status.IsGrounded;
     }
 
     void FaceDirection(Direction direction)
@@ -263,13 +257,13 @@ public class PlayerController : MonoBehaviour
         if (canJump)
         {
             ClearVerticalForce();
-            ApplyImpulseForceToDirection(jumpForce, Direction.Up);
+            ApplyImpulseForceToDirection(status.JumpForce, Direction.Up);
         }
     }
 
     bool CheckIfCanJump()
     {
-        return status.IsGrounded && !isDashing;
+        return status.IsGrounded && !status.IsDashing;
     }
 
     void ClearVerticalForce()
@@ -308,26 +302,26 @@ public class PlayerController : MonoBehaviour
 
     bool CheckIfCanDash()
     {
-        return !onDashCooldown && (status.IsGrounded || canDashInAir);
+        return !status.OnDashCooldown && (status.IsGrounded || status.CanDashInAir);
     }
 
     IEnumerator DashCoroutine()
     {
-        onDashCooldown = true;
-        isDashing = true;
+        status.OnDashCooldown = true;
+        status.IsDashing = true;
         Direction direction = GetHorizontalDirection();
 
-        ApplyImpulseForceToDirection(dashForce, direction);
+        ApplyImpulseForceToDirection(status.DashForce, direction);
         PlayAnimation("dash");
         StartCoroutine(dashDust.PlayEffect(transform));
 
         yield return new WaitForSeconds(DASH_DURATION);
         ClearHorizontalForce();
         StopAnimation("dash");
-        isDashing = false;
+        status.IsDashing = false;
 
-        yield return new WaitForSeconds(dashCooldownDuration);
-        onDashCooldown = false;
+        yield return new WaitForSeconds(status.DashCooldownDuration);
+        status.OnDashCooldown = false;
     }
 
     Direction GetHorizontalDirection()

@@ -75,6 +75,33 @@ public class PlayerStatus : MonoBehaviour
             isDashing = value;
         }
     }
+    private float dashCooldownDuration;
+    public float DashCooldownDuration
+    {
+        get => dashCooldownDuration;
+        set
+        {
+            dashCooldownDuration = value;
+        }
+    }
+    private bool canDashInAir = false;
+    public bool CanDashInAir
+    {
+        get => canDashInAir;
+        set
+        {
+            canDashInAir = value;
+        }
+    }
+    private bool onDashCooldown = false;
+    public bool OnDashCooldown
+    {
+        get => onDashCooldown;
+        set
+        {
+            onDashCooldown = value;
+        }
+    }
     private float jumpForce;
     public float JumpForce
     {
