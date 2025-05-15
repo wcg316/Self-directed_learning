@@ -10,7 +10,8 @@ public class HitHealthController : MonoBehaviour
     private float maxHealth = 100f;
     private float redHealth = 100f;
     private float currentHealth = 100f;
-    private float lastDamage = 0f;
+    private float healthToReduce = 0f;
+    private bool damageTakingDone = true;
     private InputManager inputManager;
 
     void Start()
@@ -24,13 +25,21 @@ public class HitHealthController : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        lastDamage = Mathf.Max(lastDamage, damage);
+        if (damageTakingDone)
+        {
+            healthToReduce = damage;
+            damageTakingDone = false;
+        }
+        else
+        {
+            healthToReduce = Mathf.Max(healthToReduce, damage);
+        }
         currentHealth -= damage;
         currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
     }
     public void Reducing()
     {
-        redHealth -= lastDamage * 0.006f;
+        redHealth -= healthToReduce * 0.006f;
         redHealth = Mathf.Clamp(redHealth, 0f, maxHealth);
         UpdateHealthController();
     }
@@ -48,6 +57,10 @@ public class HitHealthController : MonoBehaviour
         if (redHealth > currentHealth)
         {
             Reducing();
+        }
+        else
+        {
+            damageTakingDone = true;
         }
     }
 
