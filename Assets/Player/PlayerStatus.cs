@@ -16,7 +16,7 @@ public class PlayerStatus : MonoBehaviour
         }
         else
         {
-            Destory(gameObject);
+            Destroy(gameObject);
         }
     }
 
