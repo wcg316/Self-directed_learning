@@ -10,6 +10,11 @@ public class PlayerStatus : MonoBehaviour
 
     void Awake()
     {
+        Initialize();
+    }
+
+    void Initialize()
+    {
         if (Instance == null)
         {
             Instance = this;
@@ -20,7 +25,7 @@ public class PlayerStatus : MonoBehaviour
         }
     }
 
-    // about health
+    // about life
     private float hp;
     public float HP
     {
@@ -34,7 +39,7 @@ public class PlayerStatus : MonoBehaviour
     // about battle
 
     // about movement
-    private bool isGrounded;
+    private bool isGrounded = true;
     public bool IsGrounded
     {
         get => isGrounded;

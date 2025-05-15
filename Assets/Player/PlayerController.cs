@@ -127,8 +127,15 @@ public class PlayerController : MonoBehaviour
 
     void Variable()
     {
-        status.Instance.IsGrounded = CheckIfIsGrounded();
-        status.Instance.MoveSpeed = 10f;
+        if (status != null)
+        {
+            status.IsGrounded = CheckIfIsGrounded();
+            status.MoveSpeed = 10f;
+        }
+        else
+        {
+            Debug.LogError("PlayerStatus is not initialized.");
+        }
         dashForce = 60f;
         jumpForce = 30f;
         dashCooldownDuration = 0.5f;
@@ -144,12 +151,12 @@ public class PlayerController : MonoBehaviour
             SetHorizontalDirectionMultiplier();
             AdjustColliderWhileRunning(direction);
             MoveForwardWithSpeed(
-                status.Instance.MoveSpeed * Time.deltaTime * horizontalDirectionMultiplier
+                status.MoveSpeed * Time.deltaTime * horizontalDirectionMultiplier
             );
 
             PlayAnimation("run");
 
-            if (status.Instance.IsGrounded)
+            if (status.IsGrounded)
             {
                 PlayFootstepSound(footstepSounds, 0);
             }
@@ -262,7 +269,7 @@ public class PlayerController : MonoBehaviour
 
     bool CheckIfCanJump()
     {
-        return status.Instance.IsGrounded && !isDashing;
+        return status.IsGrounded && !isDashing;
     }
 
     void ClearVerticalForce()
@@ -301,7 +308,7 @@ public class PlayerController : MonoBehaviour
 
     bool CheckIfCanDash()
     {
-        return !onDashCooldown && (status.Instance.IsGrounded || canDashInAir);
+        return !onDashCooldown && (status.IsGrounded || canDashInAir);
     }
 
     IEnumerator DashCoroutine()
