@@ -8,6 +8,7 @@ using Unity.Burst.CompilerServices;
 public class PlayerController : MonoBehaviour
 {
     public static PlayerController Instance;
+    private PlayerStatus status;
     private ColliderController colliderController;
     private PlayerAnimation playerAnimation;
     private InputManager inputManager;
@@ -18,8 +19,6 @@ public class PlayerController : MonoBehaviour
     public LayerMask groundLayer;
     private const float EXTRA_HEIGHT = 1.4f;
     private int horizontalDirectionMultiplier = 1;
-    public bool isGrounded = true;
-    public float moveSpeed;
     public float dashForce = 60f;
     private const float DASH_DURATION = 0.15f;
     private bool isDashing = false;
@@ -58,6 +57,7 @@ public class PlayerController : MonoBehaviour
         body = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
 
+        status = PlayerStatus.Instance;
         inputManager = InputManager.Instance;
 
         footstepSoundSource.volume = 0.1f;
@@ -127,8 +127,8 @@ public class PlayerController : MonoBehaviour
 
     void Variable()
     {
-        isGrounded = CheckIfIsGrounded();
-        moveSpeed = 10f;
+        status.Instance.IsGrounded = CheckIfIsGrounded();
+        status.Instance.MoveSpeed = 10f;
         dashForce = 60f;
         jumpForce = 30f;
         dashCooldownDuration = 0.5f;
@@ -144,12 +144,12 @@ public class PlayerController : MonoBehaviour
             SetHorizontalDirectionMultiplier();
             AdjustColliderWhileRunning(direction);
             MoveForwardWithSpeed(
-                moveSpeed * Time.deltaTime * horizontalDirectionMultiplier
+                status.Instance.MoveSpeed * Time.deltaTime * horizontalDirectionMultiplier
             );
 
             PlayAnimation("run");
 
-            if (isGrounded)
+            if (status.Instance.IsGrounded)
             {
                 PlayFootstepSound(footstepSounds, 0);
             }
@@ -262,7 +262,7 @@ public class PlayerController : MonoBehaviour
 
     bool CheckIfCanJump()
     {
-        return isGrounded && !isDashing;
+        return status.Instance.IsGrounded && !isDashing;
     }
 
     void ClearVerticalForce()
@@ -301,7 +301,7 @@ public class PlayerController : MonoBehaviour
 
     bool CheckIfCanDash()
     {
-        return !onDashCooldown && (isGrounded || canDashInAir);
+        return !onDashCooldown && (status.Instance.IsGrounded || canDashInAir);
     }
 
     IEnumerator DashCoroutine()
