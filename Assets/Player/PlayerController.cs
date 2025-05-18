@@ -163,7 +163,7 @@ public class PlayerController : MonoBehaviour
 
     bool CheckIfCanMove()
     {
-        return !status.IsGrounded;
+        return !status.IsDashing;
     }
 
     void FaceDirection(Direction direction)
