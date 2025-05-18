@@ -2020,7 +2020,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1743420394}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 904cb9f29748b5246af40df9295e53ed, type: 3}
   m_Name: 
@@ -2241,6 +2241,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1979824951}
   - component: {fileID: 1979824950}
+  - component: {fileID: 1979824967}
   - component: {fileID: 1979824953}
   - component: {fileID: 1979824952}
   - component: {fileID: 1979824956}
@@ -2373,11 +2374,6 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
-  dashForce: 0
-  dashCooldownDuration: 0
-  canDashInAir: 0
-  onDashCooldown: 0
-  jumpForce: 30
   playingFootstepSound: 0
   onAttackCooldown: 0
   normalAttack:
@@ -2793,6 +2789,18 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1.3175726, y: 3.2891812}
   m_EdgeRadius: 0
+--- !u!114 &1979824967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1979824949}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 904cb9f29748b5246af40df9295e53ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
