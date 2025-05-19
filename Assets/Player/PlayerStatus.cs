@@ -112,7 +112,7 @@ public class PlayerStatus : MonoBehaviour
         }
     }
     private bool touchedRope = false;
-    public bool TouchedRope
+    public bool TouchingRope
     {
         get => touchedRope;
         set

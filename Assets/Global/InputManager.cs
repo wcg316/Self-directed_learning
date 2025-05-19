@@ -21,7 +21,8 @@ public class InputManager : MonoBehaviour
     public event Action OnJumpPressed;
     public event Action OnDashPressed;
     public event Action OnAttackPressed;
-    public event Action OnClimbPressed;
+    public event Action<Direction> OnClimbPressed;
+    public event Action OnJumpDownPressed;
     public event Action<float> OnPlayerHurt;
 
     void Awake()
@@ -90,13 +91,15 @@ public class InputManager : MonoBehaviour
 
     void HandleClimb()
     {
-        if (playerStatus.TouchedRope && Input.GetKeyDown(KeyCode.W))
-        {
+        bool playerTouchingRope = playerStatus.TouchingRope;
 
+        if (playerTouchingRope && Input.GetKeyDown(KeyCode.W))
+        {
+            OnClimbPressed?.Invoke(Direction.Up);
         }
-        else if (playerStatus.TouchedRope && Input.GetKeyDown(KeyCode.S))
+        else if (playerTouchingRope && Input.GetKeyDown(KeyCode.S))
         {
-
+            OnClimbPressed?.Invoke(Direction.Down);
         }
     }
 
@@ -105,6 +108,16 @@ public class InputManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.J))
         {
             OnAttackPressed?.Invoke();
+        }
+    }
+
+    void HandleJumpDown()
+    {
+        
+        
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            OnJumpDownPressed?.Invoke();
         }
     }
 
