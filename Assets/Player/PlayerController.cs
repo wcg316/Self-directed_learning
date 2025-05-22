@@ -79,6 +79,7 @@ public class PlayerController : MonoBehaviour
         inputManager.OnJumpPressed += Jump;
         inputManager.OnDashPressed += Dash;
         inputManager.OnAttackPressed += Attack;
+        inputManager.OnClimbPressed += Climb;
     }
 
     void OnDestroy()
@@ -163,7 +164,7 @@ public class PlayerController : MonoBehaviour
 
     bool CheckIfCanMove()
     {
-        return !status.IsDashing;
+        return !status.IsDashing && status.isClimbing;
     }
 
     void FaceDirection(Direction direction)
@@ -302,7 +303,7 @@ public class PlayerController : MonoBehaviour
 
     bool CheckIfCanDash()
     {
-        return !status.OnDashCooldown && (status.IsGrounded || status.CanDashInAir);
+        return !status.OnDashCooldown && !status.isClimbing && (status.IsGrounded || status.CanDashInAir);
     }
 
     IEnumerator DashCoroutine()
@@ -344,6 +345,16 @@ public class PlayerController : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, EXTRA_HEIGHT, groundLayer);
 
         return hit.collider != null;
+    }
+
+    void Climb(Direction direction)
+    {
+        
+    }
+
+    bool CheckIfIsTouchedRope()
+    {
+        
     }
 
     void Die()
