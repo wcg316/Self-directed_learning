@@ -26,6 +26,15 @@ public class PlayerStatus : MonoBehaviour
     }
 
     // about life
+    private bool isStabbed = false;
+    public bool IsStabbed
+    {
+        get => isStabbed;
+        set
+        {
+            isStabbed = value;
+        }
+    }
     private float hp;
     public float HP
     {
@@ -122,12 +131,12 @@ public class PlayerStatus : MonoBehaviour
     }
 
     private bool isClimbing = false;
-    public bool isClimbing
+    public bool IsClimbing
     {
         get => isClimbing;
         set
         {
-            isClimbing = value;
+            IsClimbing = value;
         }
     }
 

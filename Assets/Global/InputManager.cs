@@ -53,7 +53,7 @@ public class InputManager : MonoBehaviour
         HandleJump();
         HandleDash();
         HandleAttack();
-        HandleClimb();
+        // HandleClimb();
         HandlePlayHurt();
     }
 
@@ -61,6 +61,7 @@ public class InputManager : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.A))
         {
+            Debug.Log("1");
             OnMovePressed?.Invoke(Direction.Left);
         }
         else if (Input.GetKey(KeyCode.D))
@@ -77,6 +78,7 @@ public class InputManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            Debug.Log("2");
             OnJumpPressed?.Invoke();
         }
     }
@@ -89,19 +91,19 @@ public class InputManager : MonoBehaviour
         }
     }
 
-    void HandleClimb()
-    {
-        bool playerTouchingRope = playerStatus.TouchingRope;
+    // void HandleClimb()
+    // {
+    //     bool playerTouchingRope = playerStatus.TouchingRope;
 
-        if (playerTouchingRope && Input.GetKeyDown(KeyCode.W))
-        {
-            OnClimbPressed?.Invoke(Direction.Up);
-        }
-        else if (playerTouchingRope && Input.GetKeyDown(KeyCode.S))
-        {
-            OnClimbPressed?.Invoke(Direction.Down);
-        }
-    }
+    //     if (playerTouchingRope && Input.GetKeyDown(KeyCode.W))
+    //     {
+    //         OnClimbPressed?.Invoke(Direction.Up);
+    //     }
+    //     else if (playerTouchingRope && Input.GetKeyDown(KeyCode.S))
+    //     {
+    //         OnClimbPressed?.Invoke(Direction.Down);
+    //     }
+    // }
 
     void HandleAttack()
     {
@@ -111,15 +113,13 @@ public class InputManager : MonoBehaviour
         }
     }
 
-    void HandleJumpDown()
-    {
-        
-        
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            OnJumpDownPressed?.Invoke();
-        }
-    }
+    // void HandleJumpDown()
+    // {
+    //     if (Input.GetKeyDown(KeyCode.S))
+    //     {
+    //         OnJumpDownPressed?.Invoke();
+    //     }
+    // }
 
     void HandlePlayHurt()
     {

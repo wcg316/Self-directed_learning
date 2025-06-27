@@ -12,13 +12,16 @@ public class HitHealthController : MonoBehaviour
     private float currentHealth = 100f;
     private float healthToReduce = 0f;
     private bool damageTakingDone = true;
+    private PlayerController playerController;
     private InputManager inputManager;
 
     void Start()
     {
         redHealth = maxHealth;
         currentHealth = maxHealth;
+        playerController = PlayerController.Instance;
         inputManager = InputManager.Instance;
+        playerController.stabbed += TakeDamage;
         inputManager.OnPlayerHurt += TakeDamage;
         UpdateHealthController();
     }
@@ -39,7 +42,7 @@ public class HitHealthController : MonoBehaviour
     }
     public void Reducing()
     {
-        redHealth -= healthToReduce * 0.006f;
+        redHealth -= healthToReduce * 0.6f;
         redHealth = Mathf.Clamp(redHealth, 0f, maxHealth);
         UpdateHealthController();
     }

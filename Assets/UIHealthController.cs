@@ -8,13 +8,17 @@ public class UIHealthController : MonoBehaviour
     public Image fillImage;
     private float maxHealth = 100f;
     private float currentHealth = 100f;
+    private PlayerController playerController;
     private InputManager inputManager;
 
     void Start()
     {
         currentHealth = maxHealth;
+        playerController = PlayerController.Instance;
         inputManager = InputManager.Instance;
         inputManager.OnPlayerHurt += TakeDamage;
+        playerController.stabbed += TakeDamage;
+
         UpdateUIHealthController();
     }
 

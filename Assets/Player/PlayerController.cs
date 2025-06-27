@@ -3,6 +3,7 @@ using System.Collections;
 using static UnityEngine.Random;
 using Unity.Collections;
 using Unity.Burst.CompilerServices;
+using System;
 
 [System.Serializable]
 public class PlayerController : MonoBehaviour
@@ -17,6 +18,8 @@ public class PlayerController : MonoBehaviour
     private float footstepSoundInterval = 0.35f;
     private bool isPlayingFootstepSound = false;
     public LayerMask groundLayer;
+    public LayerMask spikeLayer;
+    public Action<float> stabbed;
     private const float EXTRA_HEIGHT = 1.4f;
     private int horizontalDirectionMultiplier = 1;
     private const float DASH_DURATION = 0.15f;
@@ -58,6 +61,7 @@ public class PlayerController : MonoBehaviour
         transform.position = new Vector2(0f, -0.45f);
 
         groundLayer = LayerMask.GetMask("Ground");
+        spikeLayer = LayerMask.GetMask("Spike");
 
         normalAttack.Initialize();
         dashDust.Initialize();
@@ -104,7 +108,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         ForTesting();
-
+        GetHurt();
         Variable();
         Die();
     }
@@ -112,6 +116,15 @@ public class PlayerController : MonoBehaviour
     void ForTesting()
     {
         Debug.DrawRay(transform.position, Vector2.down * EXTRA_HEIGHT, Color.red);
+    }
+
+    void GetHurt()
+    {
+        bool gethurt = status.IsStabbed;
+        if (gethurt)
+        {
+            stabbed?.Invoke(0.1f);
+        }
     }
 
     void TeleportToOrigin()
@@ -125,6 +138,7 @@ public class PlayerController : MonoBehaviour
         if (status != null)
         {
             status.IsGrounded = CheckIfIsGrounded();
+            status.IsStabbed = CheckIfIsStabbed();
             status.MoveSpeed = 10f;
         }
         else
@@ -164,7 +178,7 @@ public class PlayerController : MonoBehaviour
 
     bool CheckIfCanMove()
     {
-        return !status.IsDashing && status.isClimbing;
+        return !status.IsDashing && !status.IsClimbing;
     }
 
     void FaceDirection(Direction direction)
@@ -303,7 +317,7 @@ public class PlayerController : MonoBehaviour
 
     bool CheckIfCanDash()
     {
-        return !status.OnDashCooldown && !status.isClimbing && (status.IsGrounded || status.CanDashInAir);
+        return !status.OnDashCooldown && !status.IsClimbing && (status.IsGrounded || status.CanDashInAir);
     }
 
     IEnumerator DashCoroutine()
@@ -346,15 +360,16 @@ public class PlayerController : MonoBehaviour
 
         return hit.collider != null;
     }
+    bool CheckIfIsStabbed()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, EXTRA_HEIGHT, spikeLayer);
+
+        return hit.collider != null;
+    }
 
     void Climb(Direction direction)
     {
-        
-    }
 
-    bool CheckIfIsTouchedRope()
-    {
-        
     }
 
     void Die()
