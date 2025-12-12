@@ -1,2 +1,2 @@
 # Self-directed learning
-The file of self-directed learning making Unity game
+The files of self-directed learning making Unity game
